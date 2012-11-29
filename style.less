@@ -1,0 +1,153 @@
+/*!
+Theme Name: Underscores
+Theme URI: https://spliced.co/
+Author: Spliced Digital
+Author URI: http://spliced.co
+Description: Custom theme. Based on _s theme.
+Version: 1.0
+
+Resetting and rebuilding styles have been helped along thanks to the fine work of
+Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
+along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+and Blueprint http://www.blueprintcss.org/
+*/
+
+@import 'less/site/variables';
+@import 'less/site/site';
+@import 'less/mixins/all';
+
+.assistive-text {
+	.visually-hidden();
+}
+
+.clear-fix {
+	.clearfix();
+}
+
+.reset();
+
+// =Breakpoint 0
+// -------------------------------------------
+.be-all( 0 );
+
+// @import 'less/site/icons';
+// @import 'less/site/typography';
+// @import 'less/site/forms';
+// @import 'less/site/navigation';
+// @import 'less/site/media';
+// @import 'less/site/widgets';
+// @import 'less/site/plugins';
+@import 'less/site/base';
+
+// =Breakpoint 1
+// -------------------------------------------
+@media @breakpoint_1 {
+	// Don't apply the grid until the first breakpoint
+	.grid-unit {
+		padding-right: @gutter;
+
+		&:first-child {
+			padding-left: 0;
+		}
+	}
+
+	.be-all(1);
+	@import "less/site/breakpoint-1.less";
+
+} // end of media query
+
+@media @breakpoint_0_only {}
+
+// =Breakpoint 2
+// -------------------------------------------
+@media @breakpoint_2 {
+	// @flesh_size: 1em;
+	// .be-all(2);
+	// @import "less/site/breakpoint-2.less";
+} // end of media query
+
+
+// =Retina and other HiDPI UA
+// -------------------------------------------
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min--moz-device-pixel-ratio: 1.5),
+       only screen and (min-device-pixel-ratio: 1.5) {
+
+	// styles in 2x.less
+	// @import "less/site/2x.less";
+
+} // end of media query
+
+
+// =Print stylesheet
+// -------------------------------------------
+@media print {
+	* {
+		background: transparent !important;
+		color: black !important;
+		text-shadow: none !important;
+		filter:none !important;
+		-ms-filter: none !important;
+	}
+
+	a, a:visited {
+		color: #444 !important;
+		text-decoration: underline;
+
+		// show links on printed pages
+		&:after {
+			content: " (" attr(href) ")";
+		}
+
+		// show title too
+		abbr[title]:after {
+			content: " (" attr(title) ")";
+		}
+	}
+
+	.ir a:after,
+	a[href^="javascript:"]:after,
+	a[href^="#"]:after {
+		content: "";
+	}
+
+	pre, blockquote {
+		border: 1px solid #999;
+		page-break-inside: avoid;
+	}
+
+	thead {
+		display: table-header-group;
+	}
+
+	tr, img {
+		page-break-inside: avoid;
+	}
+
+	img {
+		max-width: 100% !important;
+	}
+
+    @page {
+    	margin: 0.5cm;
+    }
+
+    p, h2, h3 {
+    	orphans: 3;
+    	widows: 3;
+    }
+
+    h2,
+    h3 {
+    	page-break-after: avoid;
+    }
+
+    // hide content people who print don't need to see
+    .sidebar,
+    .page-navigation,
+    .wp-prev-next,
+    .respond-form,
+    nav {
+    	display: none;
+    }
+}

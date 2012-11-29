@@ -5,6 +5,7 @@
  * @package _s
  * @since _s 1.0
  */
+use Spliced\Theme\Underscores as T;
 ?>
 	<form method="get" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
 		<label for="s" class="assistive-text"><?php _e( 'Search', '_s' ); ?></label>

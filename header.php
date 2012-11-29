@@ -7,8 +7,12 @@
  * @package _s
  * @since _s 1.0
  */
+use Spliced\Theme\Underscores as T;
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<!--[if lt IE 7]> <html <?php language_attributes(); ?> class="no-js ie6 oldie"> <![endif]-->
+<!--[if IE 7]><html <?php language_attributes(); ?> class="no-js ie7 oldie"> <![endif]-->
+<!--[if IE 8]><html <?php language_attributes(); ?> class="no-js ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js"> <!--<![endif]-->
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width" />
@@ -17,8 +21,11 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
+<link id="oldie-styles" rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/oldie.css" />
 <![endif]-->
-
+<!--[if IE 8]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.0/IE8.js" type="text/javascript"></script>
+<![endif]-->
 <?php wp_head(); ?>
 </head>
 

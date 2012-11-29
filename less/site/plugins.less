@@ -1,0 +1,84 @@
+// -------------------------------------------
+// Plugins
+// -------------------------------------------
+
+// =Plugin: Yoast SEO: Breadcrumbs
+// -------------------------------------------
+.breadcrumbs {
+	opacity: 0.5;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+// =Plugin: Flexsilder
+// -------------------------------------------
+.quote-slider {
+	.clear-fix;
+	position: relative;
+}
+
+.flexslider {
+	.naked;
+	border: 0;
+
+	// Reset some default styles
+	.border-radius(0);
+	.box-shadow(none);
+
+	.slides {
+		height: auto !important;
+	}
+
+	.slides li {
+		height: auto !important;
+		-webkit-backface-visibility: visible;
+
+		img {
+			margin: 0;
+			height: auto;
+		}
+	}
+}
+
+.home {
+	.flex-control-nav {
+		li {}
+		li a {
+			&.flex-active {
+			}
+		}
+	}
+
+	.flex-caption {
+		display: none;
+	}
+}
+
+// =Plugin: Contact Form 7
+// -------------------------------------------
+.wpcf7-display-none {
+	display: none;
+}
+
+// =Plugin: WP-Pagenavi
+// -------------------------------------------
+.wp-pagenavi {
+	.pages {
+	}
+
+	.current {
+	}
+
+	.page,
+	.nextpostslink,
+	.previouspostslink {
+	}
+
+	.nextpostslink,
+	.previouspostslink {
+		text-decoration: none;
+	}
+
+}

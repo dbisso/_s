@@ -1,0 +1,52 @@
+/**
+ * Site-wide variables
+ */
+
+// Get clearless defaults
+@import '../mixins/settings';
+
+// Apply overrides
+@base-font-size: 16; 		// base pixel font size. Used as a default for px -> (r)em conversions
+
+// Baseline height
+@bl: 22px;
+@gutter: 1em;
+
+// Breakpoints
+// -------------------------------------------
+// Private
+@_breakpoint_1_width: '50em';
+@_breakpoint_2_width: '70em';
+
+// Public
+@breakpoint_0_only: ~'only screen and (max-width: @{_breakpoint_1_width})';
+@breakpoint_1: ~'only screen and (min-width: @{_breakpoint_1_width})';
+@breakpoint_1_only: ~'only screen and (min-width: @{_breakpoint_1_width}) and (max-width: @{_breakpoint_2_width})';
+@breakpoint_2: ~'only screen and (min-width: @{_breakpoint_2_width})';
+
+/**
+ * Colours
+ *
+ * Use American spelling for consistancy with CSS attributes
+ */
+
+// Private colours
+// @_color_private_1
+
+// Public Colours
+// @color_base: ???;
+
+// Typography
+@fonts_base:  Helvetica, Arial, sans-serif;
+@fonts_icons:  '_s_icon_font';
+
+// Clearless settings
+@using-modernizr: false;
+@base-font-size: 14;
+@using-ieclasses: true;
+@disable-filters: true;
+
+// Layout
+@ear_size: 3rem;
+@flesh_size: 1em;
+

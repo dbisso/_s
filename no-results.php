@@ -7,6 +7,7 @@
  * @package _s
  * @since _s 1.0
  */
+use Spliced\Theme\Underscores as T;
 ?>
 
 <article id="post-0" class="post no-results not-found">

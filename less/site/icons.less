@@ -1,0 +1,42 @@
+// =Icons
+// -------------------------------------------
+.pull-icon-left {
+	margin-left: 1.5em;
+	text-indent: -1.5em
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before,
+[data-icon]:after {
+	font-family: @fonts_icons;
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+[class^="icon-"]:before,
+[class*=" icon-"]:before,
+[class^="icon-"]:after,
+[class*=" icon-"]:after,
+.icon:before,
+.icon:after {
+	font-family: @fonts_icons;
+	font-style: normal;
+	speak: none;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	margin-right: 0.5em;
+}
+
+[class^="icon-rtl"]:after,
+[class*=" icon-rtl"]:after {
+	margin-left: 0.5em;
+}
+
+.icon-blank:before {
+	content: " ";
+	width: 1em;
+	display: inline-block;
+}
