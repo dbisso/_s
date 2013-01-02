@@ -9,10 +9,10 @@
  */
 use Spliced\Theme\Underscores as T;
 ?><!DOCTYPE html>
-<!--[if lt IE 7]> <html <?php language_attributes(); ?> class="no-js ie6 oldie"> <![endif]-->
-<!--[if IE 7]><html <?php language_attributes(); ?> class="no-js ie7 oldie"> <![endif]-->
-<!--[if IE 8]><html <?php language_attributes(); ?> class="no-js ie8 oldie"> <![endif]-->
-<!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]> <html <?php language_attributes(); ?> class="no-js ie6 oldie no-boxsizing no-svg"> <![endif]-->
+<!--[if IE 7]><html <?php language_attributes(); ?> class="no-js ie7 oldie no-boxsizing no-svg"> <![endif]-->
+<!--[if IE 8]><html <?php language_attributes(); ?> class="no-js ie8 oldie no-svg"> <![endif]-->
+<!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js no-boxsizing no-svg"> <!--<![endif]-->
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width" />

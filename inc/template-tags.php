@@ -54,9 +54,9 @@ function content_nav( $nav_id ) {
 	</nav><!-- #<?php echo $nav_id; ?> -->
 	<?php
 }
-endif; // Tntent_nav
+endif; // content_nav
 
-if ( ! function_exists( 'thebp_comment' ) ) :
+if ( ! function_exists( 'comment' ) ) :
 /**
  * Template for comments and pingbacks.
  *
@@ -110,9 +110,9 @@ function comment( $comment, $args, $depth ) {
 			break;
 	endswitch;
 }
-endif; // ends check for thebp_comment()
+endif; // ends check for comment()
 
-if ( ! function_exists( 'thebp_posted_on' ) ) :
+if ( ! function_exists( 'posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  *
@@ -167,5 +167,5 @@ function category_transient_flusher() {
 	// Like, beat it. Dig?
 	delete_transient( 'all_the_cool_cats' );
 }
-add_action( 'edit_category', '\Spliced\Theme\THEBP\category_transient_flusher' );
-add_action( 'save_post', '\Spliced\Theme\THEBP\category_transient_flusher' );
+add_action( 'edit_category', '\Spliced\Theme\Underscores\category_transient_flusher' );
+add_action( 'save_post', '\Spliced\Theme\Underscores\category_transient_flusher' );

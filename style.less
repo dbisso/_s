@@ -42,6 +42,11 @@ and Blueprint http://www.blueprintcss.org/
 // =Breakpoint 1
 // -------------------------------------------
 @media @breakpoint_1 {
+	body:before {
+		content: "bp1";
+		display: none;
+	}
+
 	// Don't apply the grid until the first breakpoint
 	.grid-unit {
 		padding-right: @gutter;
@@ -61,6 +66,10 @@ and Blueprint http://www.blueprintcss.org/
 // =Breakpoint 2
 // -------------------------------------------
 @media @breakpoint_2 {
+	body:before {
+		content: "bp2";
+		display: none;
+	}
 	// @flesh_size: 1em;
 	// .be-all(2);
 	// @import "less/site/breakpoint-2.less";

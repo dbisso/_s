@@ -10,6 +10,7 @@
  * @package _s
  * @since _s 1.0
  */
+use Spliced\Theme\Underscores as T;
 ?>
 
 <?php
@@ -50,7 +51,7 @@
 				 * define _s_comment() and that will be used instead.
 				 * See _s_comment() in inc/template-tags.php for more.
 				 */
-				wp_list_comments( array( 'callback' => '_s_comment' ) );
+				wp_list_comments( array( 'callback' => '\Spliced\Theme\Underscores\comment' ) );
 			?>
 		</ol><!-- .commentlist -->
 

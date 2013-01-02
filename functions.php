@@ -1,9 +1,9 @@
 <?php
 /**
- * _theme_name functions and definitions
+ * _s functions and definitions
  *
- * @package _theme_name
- * @since _theme_name 1.0
+ * @package _s
+ * @since _s 1.0
  */
 include_once dirname(__FILE__) . '/inc/theme.php';
 
@@ -14,10 +14,10 @@ include_once dirname(__FILE__) . '/inc/theme.php';
 try {
 	if ( class_exists( '\Bisso_Hooker' ) ) {
 		$hooker = new \Bisso_Hooker;
-		\Spliced\Theme\Underscores::bootstrap( $hooker );
+		\Spliced\Theme\Qace::bootstrap( $hooker );
 	} else {
 		throw new \Exception( 'Class Bisso_Hooker not found. Check that the plugin is installed.', 1 );
 	}
-} catch ( Exception $e ) {
-	wp_die( $e->getMessage(), $title = 'Theme Exception' );
+} catch ( \Exception $e ) {
+	wp_die( wp_get_theme() . ' theme bootstrap error: ' . $e->getMessage(),  wp_get_theme() . ' theme bootstrap error: ' );
 }

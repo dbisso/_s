@@ -6,25 +6,21 @@ class Underscores {
 	static $m;
 
 	function bootstrap( $hooker = null ) {
-		try {
-			if ( $hooker ) {
-				if ( !method_exists( $hooker, 'hook' ) )
-					throw new \BadMethodCallException( 'Class ' . get_class( $hooker ) . ' has no hook() method.', 1 );
+		if ( $hooker ) {
+			if ( !method_exists( $hooker, 'hook' ) )
+				throw new \BadMethodCallException( 'Class ' . get_class( $hooker ) . ' has no hook() method.', 1 );
 
-				self::$_hooker = $hooker;
-				self::$_hooker->hook( __CLASS__, 'thebp' );
-			} else {
-				throw new \BadMethodCallException( 'Hooking class for theme not specified.' , 1 );
-			}
-		} catch ( Exception $e ) {
-			wp_die( wp_get_theme() . ' theme bootstrap error: ' . $e->getMessage(),  wp_get_theme() . ' theme bootstrap error: ' );
+			self::$_hooker = $hooker;
+			self::$_hooker->hook( __CLASS__, '_s' );
+		} else {
+			throw new \BadMethodCallException( 'Hooking class for theme not specified.' , 1 );
 		}
 
 		// self::$m = new \Mustache_Engine( array(
 		// 	'loader' => new \Mustache_Loader_FilesystemLoader( get_stylesheet_directory() . '/templates' ),
 		// 	'helpers' => array(
 		// 		'__' => function( $text ) {
-		// 			return __( $text, 'thebp' );
+		// 			return __( $text, '_s' );
 		// 		}
 		// 	)
 		// ));
@@ -41,7 +37,7 @@ class Underscores {
 	 * before the init hook. The init hook is too late for some features, such as indicating
 	 * support post thumbnails.
 	 *
-	 * @since thebp 1.0
+	 * @since _s 1.0
 	 */
 	function action_after_setup_theme() {
 
@@ -63,10 +59,10 @@ class Underscores {
 		/**
 		 * Make theme available for translation
 		 * Translations can be filed in the /languages/ directory
-		 * If you're building a theme based on thebp, use a find and replace
-		 * to change 'thebp' to the name of your theme in all the template files
+		 * If you're building a theme based on _s, use a find and replace
+		 * to change '_s' to the name of your theme in all the template files
 		 */
-		load_theme_textdomain( 'thebp', get_template_directory() . '/languages' );
+		load_theme_textdomain( '_s', get_template_directory() . '/languages' );
 
 		/**
 		 * Add default posts and comments RSS feed links to head
@@ -83,8 +79,8 @@ class Underscores {
 		 */
 		register_nav_menus(
 			array(
-				'primary' => __( 'Primary Menu', 'thebp' ),
-				'secondary' => __( 'Secondary Menu', 'thebp' ),
+				'primary' => __( 'Primary Menu', '_s' ),
+				'secondary' => __( 'Secondary Menu', '_s' ),
 			)
 		);
 
@@ -115,12 +111,12 @@ class Underscores {
 	/**
 	 * Register widgetized area and update sidebar with default widgets
 	 *
-	 * @since thebp 1.0
+	 * @since _s 1.0
 	 */
 	function action_widgets_init() {
 		register_sidebar(
 			array(
-				'name'          => __( 'Sidebar', 'thebp' ),
+				'name'          => __( 'Sidebar', '_s' ),
 				'id'            => 'sidebar-1',
 				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 %2$s"><div class="inner">',
 				'after_widget'  => '</div></aside>',
@@ -131,7 +127,7 @@ class Underscores {
 
 		register_sidebar(
 			array(
-				'name'          => __( 'Secondary Sidebar', 'thebp' ),
+				'name'          => __( 'Secondary Sidebar', '_s' ),
 				'id'            => 'sidebar-2',
 				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 %2$s"><div class="inner">',
 				'after_widget'  => '</div></aside>',
@@ -142,7 +138,7 @@ class Underscores {
 
 		register_sidebar(
 			array(
-				'name'          => __( 'Footer', 'thebp' ),
+				'name'          => __( 'Footer', '_s' ),
 				'id'            => 'footer-1',
 				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 be-one-quarter-bp1 be-box-flesh-bp1 skin-beta %2$s"><div class="inner">',
 				'after_widget'  => '</div></aside>',
@@ -172,7 +168,7 @@ class Underscores {
 	// 	return $params;
 	// }
 
-	function action_thebp_before_loop() {}
+	function action__s_before_loop() {}
 
 
 	function action_admin_enqueue_scripts() {}
@@ -181,18 +177,19 @@ class Underscores {
 	 * Enqueue scripts and styles
 	 */
 	function action_wp_enqueue_scripts() {
-		global $post;
+		$post = get_post();
 
-		$ctime = filectime( get_stylesheet_directory() . '/style.css' );
-		wp_enqueue_style( 'style', get_stylesheet_directory_uri() . "/style.css", null, null );
+		// $ctime = filectime( get_stylesheet_directory() . '/style.css' );
+		wp_enqueue_style( 'style', get_stylesheet_directory_uri() . '/style.css', null, null );
+
 		wp_enqueue_script( 'respond', 'http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js', null, null,false);
-		wp_enqueue_script( 'enquire', get_template_directory_uri() . '/js/enquire.js', null, null, true );
+		// wp_enqueue_script( 'enquire', get_template_directory_uri() . '/js/enquire.js', null, null, true );
 
-		$ctime = filectime( get_stylesheet_directory() . '/js/small-menu.js' );
-		wp_enqueue_script( 'small-menu', get_template_directory_uri() . "/js/small-menu.js", array( 'jquery', 'enquire' ), null, true );
+		// $ctime = filectime( get_stylesheet_directory() . '/js/small-menu.js' );
+		wp_enqueue_script( 'small-menu', get_template_directory_uri() . '/js/small-menu.js', array( 'jquery' ), microtime(), true );
 
-		$ctime = filectime( get_stylesheet_directory() . '/js/script.js' );
-		wp_enqueue_script( 'thebp', get_template_directory_uri() . "/js/script.js", array( 'jquery' ), null, true );
+		// $ctime = filectime( get_stylesheet_directory() . '/js/script.js' );
+		wp_enqueue_script( '_s', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), null, true );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
@@ -274,129 +271,10 @@ class Underscores {
 		if ( !is_front_page() ) {
 			// Custom classes for front page
 		}
-		$classes[] = 'grid-unit';
 		$classes[] = 'stream wrapper-vertical-gutter';
 
 		return $classes;
 	}
-
-	// -------------------------------------------
-	// =Plugin: Bisso Flexslider
-	// -------------------------------------------
-
-	// function filter_bisso_flexslider_class( array $classes ) {
-	// 	//Remove copy styling from embedded sliders
-	// 	if ( is_front_page() ) {
-	// 		$classes[] = 'be-full-bp0 be-three-fifths-bp1 be-full-bp2';
-	// 	} else {
-	// 		$classes[] = 'copy';
-	// 		$classes[] = 'naked';
-	// 	}
-	// 	return $classes;
-	// }
-
-	// function filter_bisso_flexslider_caption_class( array $classes ) {
-	// 	$classes[] = 'stack-foreground';
-	// 	$classes[] = 'skin-dark-crystal';
-	// 	return $classes;
-	// }
-
-	// function filter_bisso_flexslider_slide_class( array $classes ) {
-	// 	$classes[] = 'stack';
-	// 	$classes[] = 'slide';
-	// 	return $classes;
-	// }
-
-	// function filter_bisso_flexslider_post_types( array $post_types ) {
-	// 	if ( is_front_page() ) $post_types[] = 'page';
-
-	// 	return $post_types;
-	// }
-
-	// -------------------------------------------
-	// END Plugin: Bisso Flexslider
-	// -------------------------------------------
-
-	// -------------------------------------------
-	// =Plugin: WordPress SEO
-	// -------------------------------------------
-
-	// function filter_option_wpseo_titles ( array $value ) {
-	// 	$user = wp_get_current_user();
-
-	// 	if ( in_array( 'site_admin', $user->roles ) ) {
-	// 		foreach ( get_post_types() as $type ) {
-	// 			$value['hideeditbox-' . $type] = 'on';
-	// 		}
-	// 	}
-
-	// 	return $value;
-	// }
-
-	/**
-	 * Yoast Breadcrumbs
-	 */
-	// function filter_wpseo_breadcrumb_links ( $links ) {
-	// 	global $query;
-	// 	return $links;
-	// }
-
-	// -------------------------------------------
-	// END Plugin: WordPress SEO
-	// -------------------------------------------
-
-
-	// -------------------------------------------
-	// =Plugin: Posts 2 Posts
-	// -------------------------------------------
-
-	// function action_p2p_init() {
-	// 	p2p_register_connection_type( array(
-	// 		'name'     => 'a_to_b',
-	// 		'from'     => self:://posttype1,
-	// 		'to'       => self:://posttype2,
-	// 		'sortable' => 'to'
-	// 	) );
-	// }
-
-	// function filter_p2p_new_post_args ( array $args, \P2P_Directed_Connection_Type $ctype, $from  ) {
-	// 	global $cfs;
-	// 	return $args;
-	// }
-
-	// -------------------------------------------
-	// END Plugin: Posts 2 Posts
-	// -------------------------------------------
-
-
-	// -------------------------------------------
-	// =Plugin: Spliced Limit Attachments
-	// -------------------------------------------
-
-	// function filter_spliced_limit_attachments ( $post_type ) {
-	// 	$limits = array(
-	// 		self:://posttype => //limit,
-	// 	);
-
-	// 	if ( in_array( (string) $post_type, array_keys( $limits ) ) ) return $limits[$post_type];
-	// }
-
-	// -------------------------------------------
-	// END Plugin: Spliced Limit Attachements
-	// -------------------------------------------
-
-	// -------------------------------------------
-	// =Plugin: Custom Field Suite
-	// -------------------------------------------
-
-	// function filter_cfs_field_types( array $field_types ) {
-	// 	$field_types['//field_name']     = get_stylesheet_directory() . '/inc/cfs-fields.php';
-	// 	return $field_types;
-	// }
-
-	// -------------------------------------------
-	// END Plugin: Custom Field Suite
-	// -------------------------------------------
 
 
 	function insert_after_paragraph ( $count, $content, $insertion ) {
@@ -440,7 +318,7 @@ class Underscores {
 	private function include_post_content( $slug ) {
 		$post = self::include_post( $slug );
 		if ( current_user_can( 'edit_post', $post->ID ) ) {
-			$meta = '<span class="edit"><a class="post-edit-link" href="' . get_edit_post_link( $post->ID ) . '" title="' . sprintf( esc_attr__( 'Edit %1$s', 'thebp' ), $post_type->labels->singular_name ) . '">' . __( 'Edit', 'thebp' ) . '</a></span>';
+			$meta = '<span class="edit"><a class="post-edit-link" href="' . get_edit_post_link( $post->ID ) . '" title="' . sprintf( esc_attr__( 'Edit %1$s', '_s' ), $post_type->labels->singular_name ) . '">' . __( 'Edit', '_s' ) . '</a></span>';
 		}
 
 		if ( !empty( $meta )  ) $meta = '<p class="entry-meta">' . $meta . '</p>';
@@ -487,7 +365,7 @@ class Underscores {
 		if ( file_exists( $stylesheet_images_dir . 'images/apple-touch-icon-precomposed.png' ) ) echo "<link rel='apple-touch-icon-precomposed' href='{$stylesheet_images_url}images/apple-touch-icon-precomposed.png' />";
 		if ( file_exists( $stylesheet_images_dir . 'images/apple-touch-icon.png' ) ) echo "<link rel='apple-touch-icon-precomposed' href='{$stylesheet_images_url}images/apple-touch-icon.png' />";
 
-		echo '<meta name="apple-mobile-web-app-title" content="' . __( 'Tower Hamlets EBP', 'thebp' ) . '">';
+		echo '<meta name="apple-mobile-web-app-title" content="' . __( 'Tower Hamlets EBP', '_s' ) . '">';
 	}
 
 	function action_wp_footer ( ) {
@@ -511,14 +389,14 @@ namespace Spliced\Theme\Underscores {
 			throw new \Exception( 'Class Bisso_Hooker not found. Check that the plugin is installed.', 1 );
 		}
 	} catch ( Exception $e ) {
-		wp_die( $e->getMessage(), $title = 'Theme Exception' );
+		wp_die( '[Theme _s]' . $e->getMessage(), $title = 'Theme Exception' );
 	}
 
-	include_once dirname( __FILE__ ) . '/thebp/microdata.php';
+	// include_once dirname( __FILE__ ) . '/_s/microdata.php';
 
 	function autoload( $name ) {
 		$name     = array_pop( explode( '\\', $name ));
-		$filename = dirname( __FILE__ ) . '/thebp/' . strtolower( $name ) . '.php';
+		$filename = dirname( __FILE__ ) . '/' . strtolower( $name ) . '.php';
 		// var_dump($filename);
 
 		if ( file_exists( $filename ) ) {
@@ -533,13 +411,13 @@ namespace Spliced\Theme\Underscores {
 	 * @return string          Class attribute string
 	 */
 	function primary_content_class( array $classes = array() ) {
-	  echo esc_attr( implode( ' ', apply_filters( 'thebp_primary_content_class', $classes ) ) );
+	  echo esc_attr( implode( ' ', apply_filters( '_s_primary_content_class', $classes ) ) );
 	}
 
 	/**
 	 * Set the content width based on the theme's design and stylesheet.
 	 *
-	 * @since thebp 1.0
+	 * @since _s 1.0
 	 */
 	if ( ! isset( $content_width ) )
 		$content_width = 640; /* pixels */
