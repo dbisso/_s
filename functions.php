@@ -14,7 +14,7 @@ include_once dirname(__FILE__) . '/inc/theme.php';
 try {
 	if ( class_exists( '\Bisso_Hooker' ) ) {
 		$hooker = new \Bisso_Hooker;
-		\Spliced\Theme\Qace::bootstrap( $hooker );
+		\Spliced\Theme\Underscores::bootstrap( $hooker );
 	} else {
 		throw new \Exception( 'Class Bisso_Hooker not found. Check that the plugin is installed.', 1 );
 	}
