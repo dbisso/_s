@@ -12,9 +12,9 @@ along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normali
 and Blueprint http://www.blueprintcss.org/
 */
 
-@import 'less/site/variables';
-@import 'less/site/site';
-@import 'less/mixins/all';
+@import "less/site/variables";
+@import "less/site/site";
+@import "less/mixins/all";
 
 .assistive-text {
 	.visually-hidden();
@@ -30,15 +30,14 @@ and Blueprint http://www.blueprintcss.org/
 // -------------------------------------------
 .be-all( 0 );
 
-// @import 'less/site/icons';
-// @import 'less/site/typography';
-// @import 'less/site/forms';
-// @import 'less/site/navigation';
-// @import 'less/site/media';
-// @import 'less/site/widgets';
-// @import 'less/site/plugins';
-// @import 'less/site/skin';
-@import 'less/site/base';
+@import "less/site/icons";
+@import "less/site/typography";
+@import "less/site/forms";
+@import "less/site/navigation";
+@import "less/site/media";
+@import "less/site/widgets";
+@import "less/site/plugins";
+@import "less/site/base";
 
 // =Breakpoint 1
 // -------------------------------------------
@@ -58,7 +57,7 @@ and Blueprint http://www.blueprintcss.org/
 	}
 
 	.be-all(1);
-	@import "less/site/breakpoint-1";
+	@import "less/site/breakpoint-1.less";
 
 } // end of media query
 
@@ -73,7 +72,7 @@ and Blueprint http://www.blueprintcss.org/
 	}
 	// @flesh_size: 1em;
 	// .be-all(2);
-	// @ximport "less/site/breakpoint-2";
+	// @ximport "less/site/breakpoint-2.less";
 } // end of media query
 
 
@@ -84,7 +83,7 @@ and Blueprint http://www.blueprintcss.org/
        only screen and (min-device-pixel-ratio: 1.5) {
 
 	// styles in 2x.less
-	// @ximport "less/site/2x";
+	// @ximport "less/site/2x.less";
 
 } // end of media query
 
