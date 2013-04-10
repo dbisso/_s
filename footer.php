@@ -7,8 +7,8 @@
  * @package _s
  * @since _s 1.0
  */
+use Spliced\Theme\Underscores as T;
 ?>
-
 	</div><!-- #main .site-main -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo">

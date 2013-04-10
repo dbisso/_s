@@ -5,7 +5,7 @@
  * @package _s
  * @since _s 1.0
  */
-
+use Spliced\Theme\Underscores as T;
 get_header(); ?>
 
 	<div id="primary" class="content-area">

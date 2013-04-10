@@ -7,7 +7,7 @@
  * @package _s
  * @since _s 1.0
  */
-
+use Spliced\Theme\Underscores as T;
 get_header(); ?>
 
 		<section id="primary" class="<?php T\primary_content_class() ?>">
@@ -67,7 +67,7 @@ get_header(); ?>
 					?>
 				</header><!-- .page-header -->
 
-				<?php _s_content_nav( 'nav-above' ); ?>
+				<?php T\content_nav( 'nav-above' ); ?>
 
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>
@@ -82,7 +82,7 @@ get_header(); ?>
 
 				<?php endwhile; ?>
 
-				<?php _s_content_nav( 'nav-below' ); ?>
+				<?php T\content_nav( 'nav-below' ); ?>
 
 			<?php else : ?>
 
