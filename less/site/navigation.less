@@ -5,17 +5,15 @@
 // =Menus
 // -------------------------------------------
 .main-navigation {
-	position: relative;
-	top: -2em;
 	z-index: 2;
-	ul {
+	.menu {
+		.string;
 		list-style: none;
 		margin: 0;
 		padding-left: 0;
 	}
 
-	li {
-		float: left;
+	.menu-item{
 		position: relative;
 
 		&:hover > a {}
@@ -28,34 +26,28 @@
 		text-decoration: none;
 	}
 
-	ul {
+	.sub-menu {
+		display: none;
+		float: left;
+		position: absolute;
+		left: 0em;
+		z-index: 99999;
+
 		ul {
-			display: none;
-			float: left;
-			position: absolute;
-			left: 0em;
-			z-index: 99999;
-
-			ul {
-				left: 100%;
-				top: 0;
-			}
-
-			li {}
-
-			a {
-				width: 200px;
-			}
+			left: 100%;
+			top: 0;
 		}
 
-		ul :hover > a {}
+		.menu-item{}
 
-		ul a:hover {}
-
-		li:hover > ul,
-		li.hover > ul {
-			display: block;
+		a {
+			width: 200px;
 		}
+	}
+
+	.menu-item:hover > .sub-menu,
+	.menu-item.hover > .sub-menu {
+		display: block;
 	}
 }
 
@@ -123,6 +115,10 @@ h1.menu-toggle {
 
 	.menu {
 		display: none;
+
+		.menu-visible & {
+			display: block;
+		}
 	}
 
 	.admin-bar & {

@@ -267,7 +267,7 @@ class Underscores {
 	}
 
 	function theme_filter_primary_content_class( array $classes ) {
-		$classes[] = 'be-two-thirds-bp0';
+		$classes[] = 'site-primary';
 		if ( !is_front_page() ) {
 			// Custom classes for front page
 		}

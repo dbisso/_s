@@ -44,7 +44,8 @@ get_header(); ?>
 
 							} elseif ( is_year() ) {
 								printf( __( 'Yearly Archives: %s', '_s' ), '<span>' . get_the_date( 'Y' ) . '</span>' );
-
+							} elseif ( is_post_type_archive() ) {
+								_e( post_type_archive_title() );
 							} else {
 								_e( 'Archives', '_s' );
 

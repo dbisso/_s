@@ -14,19 +14,19 @@ use Spliced\Theme\Underscores as T;
 <!--[if IE 8]><html <?php language_attributes(); ?> class="no-js ie8 oldie no-svg"> <![endif]-->
 <!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js no-boxsizing no-svg"> <!--<![endif]-->
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=device-width" />
-<title><?php wp_title( '|', true, 'right' ); ?></title>
-<link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<!--[if lt IE 9]>
-<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
-<link id="oldie-styles" rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/oldie.css" />
-<![endif]-->
-<!--[if IE 8]>
-<script src="http://ie7-js.googlecode.com/svn/version/2.0/IE8.js" type="text/javascript"></script>
-<![endif]-->
-<?php wp_head(); ?>
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+	<meta name="viewport" content="width=device-width" />
+	<title><?php wp_title( '|', true, 'right' ); ?></title>
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+	<!--[if lt IE 9]>
+	<script src="<?php esc_attr_e( get_template_directory_uri() ) ?>/js/html5.js" type="text/javascript"></script>
+	<link id="oldie-styles" rel="stylesheet" href="<?php esc_attr_e( get_template_directory_uri() ) ?>/oldie.css" />
+	<![endif]-->
+	<!--[if IE 8]>
+	<script src="http://ie7-js.googlecode.com/svn/version/2.0/IE8.js" type="text/javascript"></script>
+	<![endif]-->
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -39,7 +39,7 @@ use Spliced\Theme\Underscores as T;
 		</div>
 
 		<nav role="navigation" class="site-navigation main-navigation">
-			<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
+			<h1 class="main-menu-label assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
 			<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
 
 			<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
