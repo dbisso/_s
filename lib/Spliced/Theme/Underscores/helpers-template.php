@@ -212,11 +212,10 @@ function the_attached_image() {
 	);
 }
 
-if ( ! function_exists( '_s_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  */
-function _s_posted_on() {
+function posted_on() {
 	$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>';
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) )
 		$time_string .= '<time class="updated" datetime="%3$s">%4$s</time>';
@@ -276,5 +275,6 @@ function category_transient_flusher() {
 	// Like, beat it. Dig?
 	delete_transient( 'all_the_cool_cats' );
 }
+
 add_action( 'edit_category', '\Spliced\Theme\Underscores\category_transient_flusher' );
 add_action( 'save_post', '\Spliced\Theme\Underscores\category_transient_flusher' );
