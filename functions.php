@@ -5,19 +5,20 @@
  * @package _s
  * @since _s 1.0
  */
-include_once dirname(__FILE__) . '/inc/theme.php';
+$loader = include_once __DIR__ . '/vendor/autoload.php';
+$loader->add( 'DBisso', __DIR__ . '/lib' );
+$loader->add( 'Spliced', __DIR__ . '/lib' );
 
 /**
  * Bootstrap or die
  */
-
 try {
-	if ( class_exists( '\Bisso_Hooker' ) ) {
-		$hooker = new \Bisso_Hooker;
-		\Spliced\Theme\Underscores::bootstrap( $hooker );
+	if ( class_exists( '\DBisso\Util\Hooker' ) ) {
+		$hooker = new DBisso\Util\Hooker;
+		Spliced\Theme\Underscores\Core::bootstrap( $hooker );
 	} else {
-		throw new \Exception( 'Class Bisso_Hooker not found. Check that the plugin is installed.', 1 );
+		throw new \Exception( 'Class DBisso\Util\Hooker not found. Check that the plugin is installed.', 1 );
 	}
 } catch ( \Exception $e ) {
-	wp_die( wp_get_theme() . ' theme bootstrap error: ' . $e->getMessage(),  wp_get_theme() . ' theme bootstrap error: ' );
+	wp_die( $e->getMessage(), $title = 'Theme Exception' );
 }

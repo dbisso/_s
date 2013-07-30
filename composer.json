@@ -1,0 +1,14 @@
+{
+    "name": "dbisso/underscores",
+    "description": "Fork of _s starter theme",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Dan Bissonnet",
+            "email": "dan@danisadesigner.com"
+        }
+    ],
+    "require": {
+
+    }
+}

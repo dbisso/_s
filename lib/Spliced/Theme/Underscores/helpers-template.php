@@ -1,16 +1,64 @@
 <?php
-/**
- * Custom template tags for this theme.
- *
- * Eventually, some of the functionality here could be replaced by core features
- *
- * @package _s
- * @since _s 1.0
- */
 namespace Spliced\Theme\Underscores;
 use Spliced\Theme\Underscores as T;
 
-if ( ! function_exists( 'content_nav' ) ):
+/**
+ * Template tag to apply filters to primary content class
+ *
+ * @param  array  $classes Additional classes
+ * @return string          Class attribute string
+ */
+function primary_content_class( array $classes = array() ) {
+  echo esc_attr( implode( ' ', apply_filters( '_s_primary_content_class', $classes ) ) );
+}
+
+/**
+ * Set the content width based on the theme's design and stylesheet.
+ *
+ * @since _s 1.0
+ */
+if ( ! isset( $content_width ) )
+	$content_width = 640; /* pixels */
+
+/**
+ * Implement the Custom Header feature
+ *
+ * Uses Custom Field Suite to store slides and Bisso Flexslider plugin to manage flexslider
+ */
+
+function get_featured_slider() {
+	global $post, $cfs;
+
+	$slides        = $cfs->get( 'flexslider_slides', $post->ID );
+	$content       = '<div class="' . implode( ' ', apply_filters( 'bisso_flexslider_class', array( 'flexslider' ) ) ) . '">
+						<ul class="slides">';
+	$slide_class   = ($classes = implode( ' ', apply_filters( 'bisso_flexslider_slide_class', array() ) ) ) ? "class='$classes'" : '';
+
+	if ( !is_array( $slides ) or count( $slides ) == 0 ) {
+		error_log( '[Spliced Theme] No slides specified for feature slider' );
+		return '';
+	}
+
+	foreach ( $slides as $key => $slide ) {
+		$attachment_id         = absint( $slide['slide_background_image'] );
+		$caption_class_default = array(
+			'flex-caption',
+			'stack-' . strtolower( array_pop( $slide['slide_caption_alignment'] ) ),
+		);
+		$caption_class         = ( $classes = implode( ' ', apply_filters( 'bisso_flexslider_caption_class', $caption_class_default  ) ) ) ? "class='$classes'" : '';
+		$caption           = !empty( $slide['slide_caption'] ) ? do_shortcode( "<div $caption_class>{$slide['slide_caption']}</div>" ) : '';
+		$content           .= "<li $slide_class >" . wp_get_attachment_image( $attachment_id, 'slideshow-large', false ) . $caption . '</li>';
+	}
+
+	$content .= '</ul></div>';
+
+	return $content;
+}
+
+function featured_slider() {
+	echo get_featured_slider();
+}
+
 /**
  * Display navigation to next/previous pages when applicable
  *
@@ -54,9 +102,7 @@ function content_nav( $nav_id ) {
 	</nav><!-- #<?php echo $nav_id; ?> -->
 	<?php
 }
-endif; // content_nav
 
-if ( ! function_exists( 'comment' ) ) :
 /**
  * Template for comments and pingbacks.
  *
@@ -110,16 +156,15 @@ function comment( $comment, $args, $depth ) {
 			break;
 	endswitch;
 }
-endif; // ends check for comment()
 
-if ( ! function_exists( 'posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  *
  * @since _s 1.0
  */
 function posted_on() {
-	printf( __( 'Posted on <a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', '_s' ),
+	printf(
+		__( 'Posted on <a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', '_s' ),
 		esc_url( get_permalink() ),
 		esc_attr( get_the_time() ),
 		esc_attr( get_the_date( 'c' ) ),
@@ -129,7 +174,6 @@ function posted_on() {
 		esc_html( get_the_author() )
 	);
 }
-endif;
 
 /**
  * Returns true if a blog has more than 1 category
@@ -139,9 +183,11 @@ endif;
 function categorized_blog() {
 	if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 		// Create an array of all the categories that are attached to posts
-		$all_the_cool_cats = get_categories( array(
-			'hide_empty' => 1,
-		) );
+		$all_the_cool_cats = get_categories(
+			array(
+				'hide_empty' => 1,
+			)
+		);
 
 		// Count the number of categories that are attached to the posts
 		$all_the_cool_cats = count( $all_the_cool_cats );
