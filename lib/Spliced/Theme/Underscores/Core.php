@@ -55,11 +55,6 @@ class Core {
 	 * @since _s 1.0
 	 */
 	public function action_after_setup_theme() {
-		/**
-		 * Custom Theme Options
-		 */
-		require( get_template_directory() . '/inc/theme-options/theme-options.php' );
-
 		load_theme_textdomain( '_s', get_template_directory() . '/languages' );
 
 		add_theme_support( 'automatic-feed-links' );
