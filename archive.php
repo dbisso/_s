@@ -44,7 +44,7 @@ get_header(); ?>
 						elseif ( is_year() ) :
 							printf( __( 'Year: %s', '_s' ), '<span>' . get_the_date( 'Y' ) . '</span>' );
 
-						elseif ( is_post_type_archive() ) {
+						elseif ( is_post_type_archive() ) :
 							_e( post_type_archive_title() );
 
 						elseif ( is_tax( 'post_format', 'post-format-aside' ) ) :
@@ -90,7 +90,7 @@ get_header(); ?>
 
 			<?php endwhile; ?>
 
-			<?php _s_content_nav( 'nav-below' ); ?>
+			<?php T\content_nav( 'nav-below' ); ?>
 
 		<?php else : ?>
 
