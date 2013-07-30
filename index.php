@@ -14,36 +14,36 @@ use Spliced\Theme\Underscores as T;
 
 get_header(); ?>
 
-		<div id="primary" class="<?php T\primary_content_class() ?>">
-			<div id="content" class="site-content" role="main">
+<div id="primary" class="<?php T\primary_content_class() ?>">
+	<div id="content" class="site-content" role="main">
 
-			<?php if ( have_posts() ) : ?>
+	<?php if ( have_posts() ) : ?>
 
-				<?php T\content_nav( 'nav-above' ); ?>
+		<?php T\content_nav( 'nav-above' ); ?>
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
+		<?php /* Start the Loop */ ?>
+		<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						get_template_part( 'content', 'post' === get_post_type() ? get_post_format() : get_post_type() );
-					?>
+			<?php
+				/* Include the Post-Format-specific template for the content.
+				 * If you want to overload this in a child theme then include a file
+				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+				 */
+				get_template_part( 'content', 'post' === get_post_type() ? get_post_format() : get_post_type() );
+			?>
 
-				<?php endwhile; ?>
+		<?php endwhile; ?>
 
-				<?php T\content_nav( 'nav-below' ); ?>
+		<?php T\content_nav( 'nav-below' ); ?>
 
-			<?php else : ?>
+	<?php else : ?>
 
-				<?php get_template_part( 'no-results', 'index' ); ?>
+		<?php get_template_part( 'no-results', 'index' ); ?>
 
-			<?php endif; ?>
+	<?php endif; ?>
 
-			</div><!-- #content .site-content -->
-		</div><!-- #primary .content-area -->
+	</div><!-- #content .site-content -->
+</div><!-- #primary .content-area -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
