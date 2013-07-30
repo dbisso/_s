@@ -3,7 +3,6 @@
  * _s functions and definitions
  *
  * @package _s
- * @since _s 1.0
  */
 $loader = include_once __DIR__ . '/vendor/autoload.php';
 $loader->add( 'DBisso', __DIR__ . '/lib' );

@@ -9,7 +9,6 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package _s
- * @since _s 1.0
  */
 use Spliced\Theme\Underscores as T;
 

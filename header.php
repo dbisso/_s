@@ -5,7 +5,6 @@
  * Displays all of the <head> section and everything up till <div id="main">
  *
  * @package _s
- * @since _s 1.0
  */
 use Spliced\Theme\Underscores as T;
 ?><!DOCTYPE html>
@@ -33,14 +32,14 @@ use Spliced\Theme\Underscores as T;
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
-		<div>
+		<div class="site-branding">
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 			<p class="site-description"><?php bloginfo( 'description' ); ?></p>
 		</div>
 
 		<nav role="navigation" class="site-navigation main-navigation">
 			<h1 class="main-menu-label assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
-			<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
+			<div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
 
 			<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 		</nav><!-- .site-navigation .main-navigation -->

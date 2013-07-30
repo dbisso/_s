@@ -1,7 +1,6 @@
 <?php
 /**
  * @package _s
- * @since _s 1.0
  */
 use Spliced\Theme\Underscores as T;
 ?>
@@ -11,7 +10,12 @@ use Spliced\Theme\Underscores as T;
 
 	<div class="entry-content">
 		<?php the_content(); ?>
-		<?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', '_s' ), 'after' => '</div>' ) ); ?>
+		<?php
+			wp_link_pages( array(
+				'before' => '<div class="page-links">' . __( 'Pages:', '_s' ),
+				'after'  => '</div>',
+			) );
+		?>
 	</div><!-- .entry-content -->
 
 	<?php get_template_part( 'meta', get_post_type() ) ?>
