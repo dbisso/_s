@@ -110,7 +110,7 @@ class Core {
 			array(
 				'name'          => __( 'Footer', '_s' ),
 				'id'            => 'footer-1',
-				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 be-one-quarter-bp1 be-box-flesh-bp1 skin-beta %2$s"><div class="inner">',
+				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 be-one-quarter-bp1 be-box-flesh-bp1 %2$s"><div class="inner">',
 				'after_widget'  => '</div></aside>',
 				'before_title'  => '<h2 class="widget--title">',
 				'after_title'   => '</h2>',
