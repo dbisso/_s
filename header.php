@@ -19,7 +19,7 @@ use Spliced\Theme\Underscores as T;
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<!--[if lt IE 9]>
-	<script src="<?php esc_attr_e( get_template_directory_uri() ) ?>/js/html5.js" type="text/javascript"></script>
+	<script src="<?php esc_attr_e( get_template_directory_uri() ) ?>/js/html5shiv.js" type="text/javascript"></script>
 	<link id="oldie-styles" rel="stylesheet" href="<?php esc_attr_e( get_template_directory_uri() ) ?>/oldie.css" />
 	<![endif]-->
 	<!--[if IE 8]>
