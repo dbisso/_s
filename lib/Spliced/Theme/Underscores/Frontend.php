@@ -32,7 +32,8 @@ class Frontend {
 	}
 
 	public function action_post_class( array $classes ) {
-		$classes[] = 'stream wrapper-vertical-gutter';
+		$classes[] = 'stream';
+		$classes[] = 'entry';
 
 		return $classes;
 	}
