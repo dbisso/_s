@@ -32,6 +32,7 @@ class Core {
 		// 	)
 		// ));
 
+		// CustomHeader::bootstrap( $hooker );
 		// Updates::bootstrap( $hooker );
 		// Shortcodes::bootstrap( $hooker );
 		// Post_Types::bootstrap( $hooker );
@@ -59,6 +60,7 @@ class Core {
 
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'post-thumbnails' );
+		// add_theme_support( 'custom-header' );
 		// add_theme_support( 'post-formats', array( 'aside', ... ) );
 
 		register_nav_menus(
