@@ -35,7 +35,7 @@ class Core {
 		// CustomHeader::bootstrap( $hooker );
 		// Updates::bootstrap( $hooker );
 		// Shortcodes::bootstrap( $hooker );
-		// Post_Types::bootstrap( $hooker );
+		// PostTypes::bootstrap( $hooker );
 		// Taxonomies::bootstrap( $hooker );
 		// Plugins::bootstrap( $hooker );
 		// Insert::bootstrap( $hooker );
