@@ -10,7 +10,7 @@ use Spliced\Theme\Underscores as T;
 get_header(); ?>
 
 		<section id="primary" class="<?php T\primary_content_class() ?>">
-			<div id="content" class="site-content" role="main">
+			<main id="main" class="site-main" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -98,7 +98,7 @@ get_header(); ?>
 
 		<?php endif; ?>
 
-		</div><!-- #content -->
+		</main><!-- #main -->
 	</section><!-- #primary -->
 
 <?php get_sidebar(); ?>

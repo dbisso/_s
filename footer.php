@@ -8,7 +8,8 @@
  */
 use Spliced\Theme\Underscores as T;
 ?>
-	</div><!-- #main .site-main -->
+
+	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="inner">

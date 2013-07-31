@@ -15,7 +15,7 @@ use Spliced\Theme\Underscores as T;
 get_header(); ?>
 
 <div id="primary" class="<?php T\primary_content_class() ?>">
-	<div id="content" class="site-content" role="main">
+	<main id="main" class="site-main" role="main">
 
 	<?php if ( have_posts() ) : ?>
 
@@ -42,8 +42,8 @@ get_header(); ?>
 
 	<?php endif; ?>
 
-	</div><!-- #content .site-content -->
-</div><!-- #primary .content-area -->
+	</main><!-- #main -->
+</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

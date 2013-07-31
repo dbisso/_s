@@ -45,4 +45,4 @@ use Spliced\Theme\Underscores as T;
 		</nav><!-- .site-navigation .main-navigation -->
 	</header><!-- #masthead .site-header -->
 
-	<div id="main" class="site-main">
+	<div id="content" class="site-content">
