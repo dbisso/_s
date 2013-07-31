@@ -90,7 +90,7 @@ class Core {
 				'id'            => 'sidebar-1',
 				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 %2$s"><div class="inner">',
 				'after_widget'  => '</div></aside>',
-				'before_title'  => '<h2 class="widget-title be-ear-left-bp2">',
+				'before_title'  => '<h2 class="widget-title">',
 				'after_title'   => '</h2>',
 			)
 		);
@@ -101,7 +101,7 @@ class Core {
 				'id'            => 'sidebar-2',
 				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 %2$s"><div class="inner">',
 				'after_widget'  => '</div></aside>',
-				'before_title'  => '<h2 class="widget-title be-ear-left-bp2">',
+				'before_title'  => '<h2 class="widget-title">',
 				'after_title'   => '</h2>',
 			)
 		);
