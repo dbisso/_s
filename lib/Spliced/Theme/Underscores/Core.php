@@ -23,15 +23,6 @@ class Core {
 			throw new \BadMethodCallException( 'Hooking class for theme not specified.' , 1 );
 		}
 
-		// self::$m = new \Mustache_Engine( array(
-		// 	'loader' => new \Mustache_Loader_FilesystemLoader( get_stylesheet_directory() . '/templates' ),
-		// 	'helpers' => array(
-		// 		'__' => function( $text ) {
-		// 			return __( $text, '_s' );
-		// 		}
-		// 	)
-		// ));
-
 		// CustomHeader::bootstrap( $hooker );
 		// Updates::bootstrap( $hooker );
 		// Shortcodes::bootstrap( $hooker );
