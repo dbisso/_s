@@ -37,7 +37,7 @@ class Core {
 			Frontend::bootstrap( $hooker );
 	}
 
-	public function action_switch_theme( $name, $theme ) {
+	public function action_after_switch_theme( $name, $theme ) {
 		update_option( 'permalink_structure', '/%postname%/' );
 		update_option( 'uploads_use_yearmonth_folders', 0 );
 		flush_rewrite_rules( true );
