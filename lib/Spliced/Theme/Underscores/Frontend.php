@@ -72,22 +72,34 @@ class Frontend {
 	}
 
 	public function action_wp_head(){
-		$stylesheet_images_url = trailingslashit( get_stylesheet_directory_uri() );
-		$stylesheet_images_dir = trailingslashit( get_stylesheet_directory() );
+		$stylesheet_images_url = trailingslashit( get_stylesheet_directory_uri() ) . 'images/';
+		$stylesheet_images_dir = trailingslashit( get_stylesheet_directory() ) . 'images/';
 
-		if ( file_exists( $stylesheet_images_dir . 'images/favicon.ico' ) ) echo "<link rel='shortcut icon' href='{$stylesheet_images_url}images/favicon.ico' />";
+		$link = '<link rel="%s" href="%s" />';
+		$link_touch_icon = '<link rel="apple-touch-icon-precomposed" sizes="%s" href="' . $stylesheet_images_url . 'apple-touch-icon-%s" />';
 
-		if ( file_exists( $stylesheet_images_dir . 'images/apple-touch-icon-144x144-precomposed.png' ) ) echo "<link rel='apple-touch-icon-precomposed' sizes='144x144' href='{$stylesheet_images_url}images/apple-touch-icon-144x144-precomposed.png' />";
-		if ( file_exists( $stylesheet_images_dir . 'images/apple-touch-icon-114x114-precomposed.png' ) ) echo "<link rel='apple-touch-icon-precomposed' sizes='114x114' href='{$stylesheet_images_url}images/apple-touch-icon-114x114-precomposed.png' />";
-		if ( file_exists( $stylesheet_images_dir . 'images/apple-touch-icon-72x72-precomposed.png' ) ) echo "<link rel='apple-touch-icon-precomposed' sizes='72x72' href='{$stylesheet_images_url}images/apple-touch-icon-72x72-precomposed.png' />";
-		if ( file_exists( $stylesheet_images_dir . 'images/apple-touch-icon-57x57-precomposed.png' ) ) echo "<link rel='apple-touch-icon-precomposed' href='{$stylesheet_images_url}images/apple-touch-icon-57x57-precomposed.png' />";
-		if ( file_exists( $stylesheet_images_dir . 'images/apple-touch-icon-precomposed.png' ) ) echo "<link rel='apple-touch-icon-precomposed' href='{$stylesheet_images_url}images/apple-touch-icon-precomposed.png' />";
-		if ( file_exists( $stylesheet_images_dir . 'images/apple-touch-icon.png' ) ) echo "<link rel='apple-touch-icon-precomposed' href='{$stylesheet_images_url}images/apple-touch-icon.png' />";
+		// Add favicon if it exists
+		if ( file_exists( "{$stylesheet_images_dir}favicon.ico" ) )
+			printf( $link, 'shortcut icon', "{$stylesheet_images_url}favicon.ico" );
 
-		echo '<meta name="apple-mobile-web-app-title" content="' . __( 'Tower Hamlets EBP', '_s' ) . '">';
+		// Add iOS home screen icons if they exist
+		foreach ( array( '144', '114', '72', '57' ) as $size ) {
+			$sizes = empty( $size ) ? '' : "{$size}x{$size}";
+			if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon-{$sizes}-precomposed.png" ) )
+					printf( $link_touch_icon, $sizes, "{$sizes}-precomposed.png" );
+		}
+
+		if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon-precomposed.png" ) )
+			printf( $link, 'apple-touch-icon-precomposed', "{$stylesheet_images_url}apple-touch-icon-precomposed.png" );
+
+		if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon.png" ) )
+			printf( $link, 'apple-touch-icon-precomposed', "{$stylesheet_images_url}apple-touch-icon.png" );
+
+		// Set home screen title
+		printf( '<meta name="%s" content="%s">', 'apple-mobile-web-app-title', __( get_bloginfo( 'name', 'raw' ) , '_s' ) );
 	}
 
-	public function action_wp_footer ( ) {
+	public function action_wp_footer() {
 		if ( defined('WP_LOCAL_DEV') && true === WP_LOCAL_DEV ) echo '<div style="position: fixed; background: red; width: 20%; padding: 0.2em; bottom: 0; right: 0; color:white; font-size: 0.8em;">Local Development Mode</div>';
 	}
 
