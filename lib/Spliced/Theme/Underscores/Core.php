@@ -70,10 +70,6 @@ class Core {
 		add_image_size( 'slideshow-large', 960, 400, true );
 	}
 
-	public function action_init() {
-		// flush_rewrite_rules();
-	}
-
 	/**
 	 * Register widgetized area and update sidebar with default widgets
 	 *
