@@ -10,8 +10,7 @@ class Admin {
 			if ( !method_exists( $hooker, 'hook' ) )
 				throw new \BadMethodCallException( 'Class ' . get_class( $hooker ) . ' has no hook() method.', 1 );
 
-			self::$_hooker = $hooker;
-			self::$_hooker->hook( __CLASS__, '_s' );
+			self::$_hooker = $hooker->hook( __CLASS__, '_s' );
 		} else {
 			throw new \BadMethodCallException( 'Hooking class for theme not specified.' , 1 );
 		}
