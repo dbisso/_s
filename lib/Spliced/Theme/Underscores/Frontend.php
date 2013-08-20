@@ -66,7 +66,6 @@ class Frontend {
 		if ( !is_front_page() ) {
 			// Custom classes for front page
 		}
-		$classes[] = 'stream wrapper-vertical-gutter';
 
 		return $classes;
 	}
