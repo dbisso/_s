@@ -17,7 +17,7 @@ class Core {
 		if ( !$hooker || !method_exists( $hooker, 'hook' ) )
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 
-		self::$hooker = $hooker->hook( __CLASS__, HOOK_PREFIX );
+		self::$hooker = $hooker->hook( __CLASS__, self::HOOK_PREFIX );
 
 		// CustomHeader::bootstrap( $hooker );
 		// Updates::bootstrap( $hooker );
