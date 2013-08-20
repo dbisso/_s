@@ -19,18 +19,13 @@ use Spliced\Theme\Underscores as T;
  * @package _s
  */
 class CustomHeader {
-	static $_hooker;
-	static $m;
+	static $hooker;
 
 	public function bootstrap( $hooker = null ) {
-		if ( $hooker ) {
-			if ( !method_exists( $hooker, 'hook' ) )
-				throw new \BadMethodCallException( 'Class ' . get_class( $hooker ) . ' has no hook() method.', 1 );
+		if ( !$hooker || !method_exists( $hooker, 'hook' ) )
+			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 
-			self::$_hooker = $hooker->hook( __CLASS__, '_s' );
-		} else {
-			throw new \BadMethodCallException( 'Hooking class for theme not specified.' , 1 );
-		}
+		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
 
 	/**

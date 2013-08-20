@@ -2,18 +2,13 @@
 namespace Spliced\Theme\Underscores;
 
 class Admin {
-	static $_hooker;
-	static $m;
+	static $hooker;
 
-	function bootstrap( $hooker = null ) {
-		if ( $hooker ) {
-			if ( !method_exists( $hooker, 'hook' ) )
-				throw new \BadMethodCallException( 'Class ' . get_class( $hooker ) . ' has no hook() method.', 1 );
+	public function bootstrap( $hooker = null ) {
+		if ( !$hooker || !method_exists( $hooker, 'hook' ) )
+			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 
-			self::$_hooker = $hooker->hook( __CLASS__, '_s' );
-		} else {
-			throw new \BadMethodCallException( 'Hooking class for theme not specified.' , 1 );
-		}
+		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
 
 	function action_admin_enqueue_scripts() {}
@@ -21,6 +16,7 @@ class Admin {
 	public function filter_custom_menu_order() {
 		return true;
 	}
+
 
 	/**
 	 * Hide certain admin menus for site admins
