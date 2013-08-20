@@ -1,6 +1,5 @@
 <?php
 namespace Spliced\Theme\Underscores;
-use Spliced\Theme\Underscores as T;
 
 class Frontend {
 	static $hooker;
