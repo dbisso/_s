@@ -70,13 +70,15 @@ function content_nav( $nav_id ) {
 		$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
 		$next = get_adjacent_post( false, '', false );
 
-		if ( ! $next && ! $previous )
+		if ( ! $next && ! $previous ) {
 			return;
+		}
 	}
 
 	// Don't print empty markup in archives if there's only one page.
-	if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) )
+	if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) ) {
 		return;
+	}
 
 	$nav_class = ( is_single() ) ? 'post-navigation' : 'paging-navigation';
 
@@ -131,7 +133,7 @@ function comment( $comment, $args, $depth ) {
 		<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
 			<footer class="comment-meta">
 				<div class="comment-author vcard">
-					<?php if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'] ); ?>
+					<?php if ( 0 != $args['avatar_size'] ) { echo get_avatar( $comment, $args['avatar_size'] ); } ?>
 					<?php printf( __( '%s <span class="says">says:</span>', '_s' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 				</div><!-- .comment-author -->
 
@@ -223,8 +225,9 @@ function the_attached_image() {
  */
 function posted_on() {
 	$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) )
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 		$time_string .= '<time class="updated" datetime="%3$s">%4$s</time>';
+	}
 
 	$time_string = sprintf( $time_string,
 		esc_attr( get_the_date( 'c' ) ),
