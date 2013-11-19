@@ -67,7 +67,7 @@
 	}
 
 	// Bind the menu
-	$( '.site-navigation' ).smallMenu();
+	$( '#site-navigation' ).smallMenu();
 
 	// Bind to resize and trigger initial test.
 	$(window).resize($.debounce(350, smallMenu)).resize();

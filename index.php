@@ -19,8 +19,6 @@ get_header(); ?>
 
 	<?php if ( have_posts() ) : ?>
 
-		<?php T\content_nav( 'nav-above' ); ?>
-
 		<?php /* Start the Loop */ ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 
@@ -36,7 +34,7 @@ get_header(); ?>
 
 		<?php T\content_nav( 'nav-below' ); ?>
 
-	<?php else : ?>
+			<?php get_template_part( 'content', 'none' ); ?>
 
 		<?php get_template_part( 'no-results', 'index' ); ?>
 
