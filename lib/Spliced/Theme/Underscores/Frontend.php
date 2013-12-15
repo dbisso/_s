@@ -57,9 +57,6 @@ class Frontend {
 
 	public function theme_filter_primary_content_class( array $classes ) {
 		$classes[] = 'site-primary';
-		if ( !is_front_page() ) {
-			// Custom classes for front page
-		}
 
 		return $classes;
 	}
