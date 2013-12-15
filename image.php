@@ -44,7 +44,7 @@ get_header();
 				<div class="entry-content">
 					<div class="entry-attachment">
 						<div class="attachment">
-							<?php _s_the_attached_image(); ?>
+							<?php T\the_attached_image(); ?>
 						</div><!-- .attachment -->
 
 						<?php if ( has_excerpt() ) : ?>
