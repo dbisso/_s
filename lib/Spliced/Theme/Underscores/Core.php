@@ -76,7 +76,7 @@ class Core {
 			array(
 				'name'          => __( 'Sidebar', '_s' ),
 				'id'            => 'sidebar-1',
-				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 %2$s"><div class="inner">',
+				'before_widget' => '<aside id="%1$s" class="widget %2$s"><div class="widget--inner">',
 				'after_widget'  => '</div></aside>',
 				'before_title'  => '<h2 class="widget--title">',
 				'after_title'   => '</h2>',
@@ -87,7 +87,7 @@ class Core {
 			array(
 				'name'          => __( 'Secondary Sidebar', '_s' ),
 				'id'            => 'sidebar-2',
-				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 %2$s"><div class="inner">',
+				'before_widget' => '<aside id="%1$s" class="widget %2$s"><div class="widget--inner">',
 				'after_widget'  => '</div></aside>',
 				'before_title'  => '<h2 class="widget--title">',
 				'after_title'   => '</h2>',
@@ -98,7 +98,7 @@ class Core {
 			array(
 				'name'          => __( 'Footer', '_s' ),
 				'id'            => 'footer-1',
-				'before_widget' => '<aside id="%1$s" class="widget be-full-bp0 be-one-quarter-bp1 be-box-flesh-bp1 %2$s"><div class="inner">',
+				'before_widget' => '<aside id="%1$s" class="widget %2$s"><div class="widget--inner">',
 				'after_widget'  => '</div></aside>',
 				'before_title'  => '<h2 class="widget--title">',
 				'after_title'   => '</h2>',
