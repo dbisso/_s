@@ -1,0 +1,30 @@
+@import '../site/variables';
+
+._flesh-loop (@index) when (@index <= length(@_width_keywords) ) {
+	@keyword: extract( @_width_keywords, @index );
+	@value: ~"@{_width_keyword_@{keyword}}";
+
+		.flesh-above\:@{keyword} {
+		padding-top: @value;
+	}
+
+	.flesh-below\:@{keyword} {
+		padding-bottom: @value;
+	}
+
+	.flesh-before\:@{keyword} {
+		padding-left: @value;
+	}
+
+	.flesh-after\:@{keyword} {
+		padding-right: @value;
+	}
+
+	.flesh-all\:@{keyword} {
+		padding: @value;
+	}
+
+	._flesh-loop(@index + 1);
+}
+
+._flesh-loop(1);

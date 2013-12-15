@@ -15,14 +15,14 @@
 // Breakpoints
 // -------------------------------------------
 // Private
-@_breakpoint_1_width: '50em';
-@_breakpoint_2_width: '70em';
+@_breakpoint-1-width: '50em';
+@_breakpoint-2-width: '70em';
 
 // Public
-@breakpoint_0_only: ~'only screen and (max-width: @{_breakpoint_1_width})';
-@breakpoint_1: ~'only screen and (min-width: @{_breakpoint_1_width})';
-@breakpoint_1_only: ~'only screen and (min-width: @{_breakpoint_1_width}) and (max-width: @{_breakpoint_2_width})';
-@breakpoint_2: ~'only screen and (min-width: @{_breakpoint_2_width})';
+@breakpoint-0-only: ~'only screen and (max-width: @{_breakpoint-1-width})';
+@breakpoint-1: ~'only screen and (min-width: @{_breakpoint-1-width})';
+@breakpoint-1-only: ~'only screen and (min-width: @{_breakpoint-1-width}) and (max-width: @{_breakpoint-2-width})';
+@breakpoint-2: ~'only screen and (min-width: @{_breakpoint-2-width})';
 
 /**
  * Colours
@@ -34,11 +34,11 @@
 // @_color_private_1
 
 // Public Colours
-@color_base: white;
+@color-base: white;
 
 // Typography
-@fonts_base:  Helvetica, Arial, sans-serif;
-@fonts_icons:  '_s_icon_font';
+@fonts-base:  Helvetica, Arial, sans-serif;
+@fonts-icons:  '_s_icon_font';
 
 // Clearless settings
 @using-modernizr: false;
@@ -47,6 +47,14 @@
 @disable-filters: true;
 
 // Layout
-@ear_size: 3rem;
-@flesh_size: 1em;
+@ear-size: 3rem;
+@flesh-size: 1em;
 
+// Width keywords
+@_width_keywords: auto none thin normal wide;
+@_width_keyword_noop: noop;
+@_width_keyword_auto: auto;
+@_width_keyword_none: 0;
+@_width_keyword_thin: .5rem;
+@_width_keyword_normal: 1rem;
+@_width_keyword_wide: 2rem;

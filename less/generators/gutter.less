@@ -1,0 +1,29 @@
+@import '../site/variables';
+
+._gutter-loop (@index) when (@index <= length(@_width_keywords)) {
+	@keyword: extract( @_width_keywords, @index );
+	@value: ~"@{_width_keyword_@{keyword}}";
+	.gutter-above\:@{keyword} {
+		margin-top: @value;
+	}
+
+	.gutter-below\:@{keyword} {
+		margin-bottom: @value;
+	}
+
+	.gutter-before\:@{keyword} {
+		margin-left: @value;
+	}
+
+	.gutter-after\:@{keyword} {
+		margin-right: @value;
+	}
+
+	.gutter-all\:@{keyword} {
+		margin: @value;
+	}
+
+	._gutter-loop(@index + 1);
+}
+
+._gutter-loop(1);

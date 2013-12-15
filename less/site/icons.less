@@ -5,30 +5,32 @@
 	text-indent: -1.5em
 }
 
-/* Use the following CSS code if you want to use data attributes for inserting your icons */
-[data-icon]:before,
-[data-icon]:after {
-	font-family: @fonts_icons;
-	content: attr(data-icon);
-	speak: none;
-	font-weight: normal;
-	-webkit-font-smoothing: antialiased;
-}
-
 /* Use the following CSS code if you want to have a class per icon */
+[data-icon]:before,
+[data-icon]:after,
 [class^="icon-"]:before,
 [class*=" icon-"]:before,
 [class^="icon-"]:after,
 [class*=" icon-"]:after,
 .icon:before,
 .icon:after {
-	font-family: @fonts_icons;
-	font-style: normal;
+	font-family: @fonts-icons;
 	speak: none;
+	font-style: normal;
 	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
 	-webkit-font-smoothing: antialiased;
-	margin-right: 0.5em;
+	-moz-osx-font-smoothing: grayscale;
 }
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before,
+[data-icon]:after {
+	content: attr(data-icon);
+}
+
 
 [class^="icon-rtl"]:after,
 [class*=" icon-rtl"]:after {
