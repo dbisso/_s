@@ -14,7 +14,7 @@ class Core {
 	const HOOK_PREFIX = '_s';
 
 	public function bootstrap( $hooker = null ) {
-		if ( !$hooker || !method_exists( $hooker, 'hook' ) )
+		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) )
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 
 		self::$hooker = $hooker->hook( __CLASS__, self::HOOK_PREFIX );

@@ -5,7 +5,7 @@ class Admin {
 	static $hooker;
 
 	public function bootstrap( $hooker = null ) {
-		if ( !$hooker || !method_exists( $hooker, 'hook' ) )
+		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) )
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 
 		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
@@ -16,7 +16,6 @@ class Admin {
 	public function filter_custom_menu_order() {
 		return true;
 	}
-
 
 	/**
 	 * Hide certain admin menus for site admins
