@@ -20,97 +20,63 @@ function primary_content_class( array $classes = array() ) {
 if ( ! isset( $content_width ) )
 	$content_width = 640; /* pixels */
 
+if ( ! function_exists( '_s_paging_nav' ) ) :
 /**
- * Implement the Custom Header feature
+ * Display navigation to next/previous set of posts when applicable.
  *
- * Uses Custom Field Suite to store slides and Bisso Flexslider plugin to manage flexslider
+ * @return void
  */
-
-function get_featured_slider() {
-	global $post, $cfs;
-
-	$slides        = $cfs->get( 'flexslider_slides', $post->ID );
-	$content       = '<div class="' . implode( ' ', apply_filters( 'bisso_flexslider_class', array( 'flexslider' ) ) ) . '">
-						<ul class="slides">';
-	$slide_class   = ($classes = implode( ' ', apply_filters( 'bisso_flexslider_slide_class', array() ) ) ) ? "class='$classes'" : '';
-
-	if ( !is_array( $slides ) or count( $slides ) == 0 ) {
-		error_log( '[Spliced Theme] No slides specified for feature slider' );
-		return '';
-	}
-
-	foreach ( $slides as $key => $slide ) {
-		$attachment_id         = absint( $slide['slide_background_image'] );
-		$caption_class_default = array(
-			'flex-caption',
-			'stack-' . strtolower( array_pop( $slide['slide_caption_alignment'] ) ),
-		);
-		$caption_class         = ( $classes = implode( ' ', apply_filters( 'bisso_flexslider_caption_class', $caption_class_default  ) ) ) ? "class='$classes'" : '';
-		$caption           = !empty( $slide['slide_caption'] ) ? do_shortcode( "<div $caption_class>{$slide['slide_caption']}</div>" ) : '';
-		$content           .= "<li $slide_class >" . wp_get_attachment_image( $attachment_id, 'slideshow-large', false ) . $caption . '</li>';
-	}
-
-	$content .= '</ul></div>';
-
-	return $content;
-}
-
-function featured_slider() {
-	echo get_featured_slider();
-}
-
-/**
- * Display navigation to next/previous pages when applicable
- */
-function content_nav( $nav_id ) {
-	global $wp_query, $post;
-
-	// Don't print empty markup on single pages if there's nowhere to navigate.
-	if ( is_single() ) {
-		$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
-		$next = get_adjacent_post( false, '', false );
-
-		if ( ! $next && ! $previous ) {
-			return;
-		}
-	}
-
-	// Don't print empty markup in archives if there's only one page.
-	if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) ) {
+function _s_paging_nav() {
+	// Don't print empty markup if there's only one page.
+	if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
 		return;
 	}
-
-	$nav_class = ( is_single() ) ? 'post-navigation' : 'paging-navigation';
-
-	if ( function_exists( 'wp_pagenavi' ) ) {
-		wp_pagenavi();
-		return;
-	}
-
 	?>
-	<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
-		<h1 class="screen-reader-text"><?php _e( 'Post navigation', '_s' ); ?></h1>
+	<nav class="navigation paging-navigation" role="navigation">
+		<h1 class="screen-reader-text"><?php _e( 'Posts navigation', '_s' ); ?></h1>
+		<div class="nav-links">
 
-	<?php if ( is_single() ) : // navigation links for single posts ?>
+			<?php if ( get_next_posts_link() ) : ?>
+			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', '_s' ) ); ?></div>
+			<?php endif; ?>
 
-		<?php previous_post_link( '<div class="nav-previous">%link</div>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', '_s' ) . '</span> %title' ); ?>
-		<?php next_post_link( '<div class="nav-next">%link</div>', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', '_s' ) . '</span>' ); ?>
+			<?php if ( get_previous_posts_link() ) : ?>
+			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', '_s' ) ); ?></div>
+			<?php endif; ?>
 
-	<?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
-
-		<?php if ( get_next_posts_link() ) : ?>
-		<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', '_s' ) ); ?></div>
-		<?php endif; ?>
-
-		<?php if ( get_previous_posts_link() ) : ?>
-		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', '_s' ) ); ?></div>
-		<?php endif; ?>
-
-	<?php endif; ?>
-
-	</nav><!-- #<?php echo esc_html( $nav_id ); ?> -->
+		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
 	<?php
 }
+endif;
+
+if ( ! function_exists( '_s_post_nav' ) ) :
+/**
+ * Display navigation to next/previous post when applicable.
+ *
+ * @return void
+ */
+function _s_post_nav() {
+	// Don't print empty markup if there's nowhere to navigate.
+	$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
+	$next     = get_adjacent_post( false, '', false );
+
+	if ( ! $next && ! $previous ) {
+		return;
+	}
+	?>
+	<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text"><?php _e( 'Post navigation', '_s' ); ?></h1>
+		<div class="nav-links">
+
+			<?php previous_post_link( '%link', _x( '<span class="meta-nav">&larr;</span> %title', 'Previous post link', '_s' ) ); ?>
+			<?php next_post_link(     '%link', _x( '%title <span class="meta-nav">&rarr;</span>', 'Next post link',     '_s' ) ); ?>
+
+		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	<?php
+}
+endif;
 
 /**
  * Template for comments and pingbacks.

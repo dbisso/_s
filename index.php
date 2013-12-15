@@ -32,7 +32,7 @@ get_header(); ?>
 
 		<?php endwhile; ?>
 
-		<?php T\content_nav( 'nav-below' ); ?>
+			<?php T\paging_nav(); ?>
 
 			<?php get_template_part( 'content', 'none' ); ?>
 
