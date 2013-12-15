@@ -10,7 +10,6 @@ namespace Spliced\Theme\Underscores;
  */
 class Core {
 	static $hooker;
-	static $m;
 	const HOOK_PREFIX = '_s';
 
 	public function bootstrap( $hooker = null ) {
