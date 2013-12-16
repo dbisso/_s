@@ -15,7 +15,6 @@
 img[class*="align"],
 img[class*="wp-image-"] {
 	height: auto; /* Make sure images with WordPress-added height and width attributes are scaled correctly */
-	margin-bottom: 0.5em;
 }
 
 .site-header img,
@@ -24,6 +23,12 @@ img.size-full {
 	max-width: 100%;
 	// width: auto; /* Prevent stretching of full-size images with height and width attributes in IE8 */
 }
+
+img[class*="align"],
+img[class*="wp-image-"] {
+	// Styles for inline images in posts
+}
+
 .entry-content img.wp-smiley,
 .comment-content img.wp-smiley {
 	border: none;
