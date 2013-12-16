@@ -91,6 +91,10 @@ class Frontend {
 		if ( defined( 'WP_LOCAL_DEV' ) && true === WP_LOCAL_DEV ) echo '<div style="position: fixed; background: red; width: 20%; padding: 0.2em; bottom: 0; right: 0; color:white; font-size: 0.8em;">Local Development Mode</div>';
 	}
 
+	public function filter_use_default_gallery_style( $use_style ) {
+		return false;
+	}
+
 	/**
 	 * Remove some sidebars according to certain conditions
 	 */
