@@ -3,16 +3,9 @@
 // -------------------------------------------
 body {
 	font-family: @fonts-base;
-	font-weight: 300;
-	// font-size: 1.2rem;
-	.remify( font-size, 1.2 );
 }
 
- // =Base copy styles
-.copy {
-	@indent: 1.0em;
-	@bl: 0.5em;
-
+.copy-headings {
 	@{elements-headings-2-6} {
 		clear: none;
 	}
@@ -52,13 +45,25 @@ body {
 	h6 {
 		font-size: 0.8em;
 	}
+}
 
-	p {
-		margin-bottom: 1.5em;
+.copy-lists {
+	@indent: 1.0em;
+	ul, ol {
+		margin: 0 0 1.5em @indent * 2;
 	}
 
-	ul, ol {
-		// margin: 0 0 1.5em @indent * 2;
+	ul {
+		list-style: disc;
+	}
+
+	ol {
+		list-style: decimal;
+	}
+
+	ul ul, ol ol, ul ol, ol ul {
+		margin-bottom: 0;
+		margin-left: @indent;
 	}
 
 	dt {
@@ -66,8 +71,61 @@ body {
 	}
 
 	dd {
-		margin: 0 @indent + 0.5em 1.5em;
+		margin: 0 ( @indent + 0.5em ) 1.5em;
 	}
+}
+
+.copy-tables {
+	table {
+		margin: 1em 0 1.5em;
+		width: 100%;
+	}
+
+	td, th {
+		padding: 0.15em 0.15em 0.15em 0;
+		vertical-align: middle;
+		text-align: left;
+	}
+
+	th {
+		font-weight: bold;
+	}
+}
+
+.copy-block {
+	@indent: 1em;
+
+	p {
+		margin-bottom: 1.5em;
+	}
+
+	blockquote {
+		margin: 0 @indent;
+	}
+
+	pre {
+		background: #eee;
+		font-family: "Courier 10 Pitch", Courier, monospace;
+		line-height: 1.6;
+		margin-bottom: 1.6em;
+		padding: 1.6em;
+		overflow: auto;
+		max-width: 100%;
+	}
+
+	address {
+		margin: 0 0 1.5em;
+	}
+
+	figure {
+		margin: 0;
+	}
+}
+
+ // =Base copy styles
+.copy-inline {
+	@indent: 1.0em;
+	@bl: 0.5em;
 
 	b, strong {
 		font-weight: bold;
@@ -75,25 +133,6 @@ body {
 
 	dfn, em, i {
 		font-style: italic;
-	}
-
-	blockquote {
-		margin: 0 @indent;
-	}
-
-	address {
-		margin: 0 0 1.5em;
-	}
-
-	pre {
-		background: #eee;
-		font-family: "Courier 10 Pitch", Courier, monospace;
-		.font-size-rems(1.5);
-		line-height: 1.6;
-		margin-bottom: 1.6em;
-		padding: 1.6em;
-		overflow: auto;
-		max-width: 100%;
 	}
 
 	code, kbd, tt, var {
@@ -106,7 +145,7 @@ body {
 	}
 
 	mark, ins {
-		background: #fff9c0;
+		background: yellow;
 		text-decoration: none;
 	}
 
@@ -134,25 +173,6 @@ body {
 	big {
 		font-size: 125%;
 	}
-
-	figure {
-		margin: 0;
-	}
-
-	table {
-		margin: 1em 0 1.5em;
-		width: 100%;
-	}
-
-	td, th {
-		padding: 0.15em 0.15em 0.15em 0;
-		vertical-align: middle;
-		text-align: left;
-	}
-
-	th {
-		font-weight: bold;
-	}
 }
 
 .copy-naked,
@@ -174,10 +194,6 @@ body {
 		margin: 0;
 	}
 
-	dt {
-		font-weight: bold;
-	}
-
 	dd {
 		margin: 0;
 	}
@@ -186,47 +202,23 @@ body {
 
 // =Alpha copy styles
 .copy-bigger {
-	.font-size-rems( 1.2rem );
+	font-size: 120%;
 }
 
 // =Beta copy styles
 .copy-smaller {
-	.font-size-rems( 0.9rem );
+	font-size: 80%;
 }
 
+// =Alpha copy styles
+.copy-much-bigger {
+	font-size: 150%;
+}
+
+// =Beta copy styles
+.copy-smaller {
+	font-size: 60%;
+}
 
 // =Entry copy styles
-.copy-entry {
-	@indent: 1em;
-
-	.font-size-rems(1);
-
-	h4 {
-		text-decoration: underline;
-	}
-
-	h5 {
-		font-size: 0.9em;
-	}
-
-	h6 {
-		font-size: 0.9em;
-	}
-
-	ul, ol {
-		margin: 0 0 1.5em @indent * 2;
-	}
-
-	ul {
-		list-style: disc;
-	}
-
-	ol {
-		list-style: decimal;
-	}
-
-	ul ul, ol ol, ul ol, ol ul {
-		margin-bottom: 0;
-		margin-left: @indent;
-	}
-}
+.copy-entry {}
