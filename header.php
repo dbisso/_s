@@ -18,13 +18,12 @@ use Spliced\Theme\Underscores as T;
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	<!--[if lt IE 9]>
-	<script src="<?php esc_attr_e( get_template_directory_uri() ) ?>/js/html5shiv.js" type="text/javascript"></script>
-	<link id="oldie-styles" rel="stylesheet" href="<?php esc_attr_e( get_template_directory_uri() ) ?>/oldie.css" />
-	<![endif]-->
-	<!--[if IE 8]>
+<!--[if lt IE 9]>
+	<script src="<?php esc_attr_e( get_template_directory_uri() ) ?>/js/vendor/html5shiv.js" type="text/javascript"></script>
+	<script src="<?php esc_attr_e( get_template_directory_uri() ) ?>/js/vendor/getComputedStyle.js" type="text/javascript"></script>
 	<script src="http://ie7-js.googlecode.com/svn/version/2.0/IE8.js" type="text/javascript"></script>
-	<![endif]-->
+	<link id="oldie-styles" rel="stylesheet" href="<?php esc_attr_e( get_template_directory_uri() ) ?>/oldie.css" />
+<![endif]-->
 	<?php wp_head(); ?>
 </head>
 

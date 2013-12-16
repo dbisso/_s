@@ -1,12 +1,4 @@
-/*!
- * jQuery throttle / debounce - v1.1 - 3/7/2010
- * http://benalman.com/projects/jquery-throttle-debounce-plugin/
- *
- * Copyright (c) 2010 "Cowboy" Ben Alman
- * Dual licensed under the MIT and GPL licenses.
- * http://benalman.com/about/license/
- */
-(function(b,c){var $=b.jQuery||b.Cowboy||(b.Cowboy={}),a;$.throttle=a=function(e,f,j,i){var h,d=0;if(typeof f!=="boolean"){i=j;j=f;f=c}function g(){var o=this,m=+new Date()-d,n=arguments;function l(){d=+new Date();j.apply(o,n)}function k(){h=c}if(i&&!h){l()}h&&clearTimeout(h);if(i===c&&m>e){l()}else{if(f!==true){h=setTimeout(i?k:l,i===c?e-m:e)}}}if($.guid){g.guid=j.guid=j.guid||$.guid++}return g};$.debounce=function(d,e,f){return f===c?a(d,e,false):a(d,f,e!==false)}})(this);
+/* global jQuery:true, _:true */
 
 /**
  * Micro plugin that removes one class and adds another
@@ -35,24 +27,16 @@
 				case 'large':
 					menus.swapClass( 'main-small-navigation', 'main-navigation' );
 					labels.swapClass( 'menu-toggle', 'assistive-text' );
+					menus.insertAfter( '.site-branding' );
 					break;
 				case 'small':
 					menus.swapClass( 'main-navigation', 'main-small-navigation' );
 					labels.swapClass( 'assistive-text', 'menu-toggle' );
+					menus.insertBefore( '.site' );
 					break;
 			}
-		});
 
-		labels.click( function() {
-			var label = $(this),
-				menu = $(this).parents( menus );
-			// Don't respond if menu is not in small mode
-			if ( menu.hasClass( 'main-small-navigation' ) ) {
-				var labelText = label.text();
-
-				menu.toggleClass( 'menu-visible' );
-				label.text( label.data( 'label-alt' ) ).data( 'label-alt', labelText );
-			}
+			menus.uncomment();
 		});
 
 		return this;
@@ -60,15 +44,36 @@
 })(jQuery);
 
 (function($){
-	function smallMenu () {
+	function maybeSmallMenu () {
 		// Breakpoint name is stored in hidden psudo element on body.
-		var breakpoint = String(getComputedStyle(document.body, '::before')['content']);
+		var breakpoint = String(getComputedStyle(document.body, '::before').content).replace(/"/g, '');
 		$(document).trigger( 'smallMenu:change', $.inArray( breakpoint, ['bp1', 'bp2'] ) >= 0 ? 'large' : 'small' );
 	}
 
 	// Bind the menu
 	$( '#site-navigation' ).smallMenu();
 
-	// Bind to resize and trigger initial test.
-	$(window).resize($.debounce(350, smallMenu)).resize();
+	$( '.menu-toggle' ).attr('href', '#').click( function( event ) {
+		event.preventDefault();
+
+		var label = $(this),
+			menu = $( '#' + label.data('menu') );
+
+		menu.trigger( 'menu.show' );
+
+		// Don't respond if menu is not in small mode
+		if ( menu.hasClass( 'main-small-navigation' ) ) {
+			var labelText = label.text();
+			$('body').toggleClass( 'menu-visible' );
+			menu.toggleClass( 'menu-visible' );
+			label.toggleClass( 'menu-visible' );
+			label.text( label.data( 'label-alt' ) ).data( 'label-alt', labelText );
+		}
+	});
+
+	// Bind to resize.
+	$(window).resize(_.debounce(maybeSmallMenu, 350));
+
+	// Trigger initial test.
+	maybeSmallMenu();
 })(jQuery);
