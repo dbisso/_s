@@ -20,13 +20,12 @@ function primary_content_class( array $classes = array() ) {
 if ( ! isset( $content_width ) )
 	$content_width = 640; /* pixels */
 
-if ( ! function_exists( '_s_paging_nav' ) ) :
 /**
  * Display navigation to next/previous set of posts when applicable.
  *
  * @return void
  */
-function _s_paging_nav() {
+function paging_nav() {
 	// Don't print empty markup if there's only one page.
 	if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
 		return;
@@ -48,15 +47,13 @@ function _s_paging_nav() {
 	</nav><!-- .navigation -->
 	<?php
 }
-endif;
 
-if ( ! function_exists( '_s_post_nav' ) ) :
 /**
  * Display navigation to next/previous post when applicable.
  *
  * @return void
  */
-function _s_post_nav() {
+function post_nav() {
 	// Don't print empty markup if there's nowhere to navigate.
 	$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
 	$next     = get_adjacent_post( false, '', false );
@@ -76,7 +73,6 @@ function _s_post_nav() {
 	</nav><!-- .navigation -->
 	<?php
 }
-endif;
 
 /**
  * Template for comments and pingbacks.
