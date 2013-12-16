@@ -4,7 +4,7 @@
 
 // =Menus
 // -------------------------------------------
-.main-navigation {
+._menu_dropdown {
 	z-index: 2;
 	.menu {
 		.string;
@@ -23,7 +23,6 @@
 
 	a {
 		display: block;
-		text-decoration: none;
 	}
 
 	.sub-menu {
@@ -31,7 +30,7 @@
 		float: left;
 		position: absolute;
 		left: 0em;
-		z-index: 99999;
+		z-index: 20;
 
 		ul {
 			left: 100%;
@@ -51,19 +50,15 @@
 	}
 }
 
-// Menu skin
-.main-navigation {
-	font-size: 0.9em;
 
+// Stub for main menu skin
+.main-navigation {
 	.sub-menu {
-		a {
-			border-right: 0;
-		}
+		a {}
 	}
 
 	a {
-		li:last-child & {
-		}
+		li:last-child & {}
 	}
 
 	// Sub-menus
@@ -73,18 +68,15 @@
 		a {}
 	}
 
-	li {
+	.menu-item {
 		&.current-menu-item,
 		&.current_page_ancestor {
-			a {
-				z-index: 20;
-			}
+			a {}
 		}
 
 		&:hover,
 		&.hover {
-			> a {
-			}
+			> a {}
 		}
 	}
 }
@@ -102,16 +94,24 @@
 }
 
 /* Small menu */
-h1.menu-toggle {
+.menu-toggle {
 	cursor: pointer;
-	text-align: left;
-	vertical-align: middle;
+
+	@media @breakpoint-1 {
+		.js & {
+			// Hide menu toggle link above BP0 unless no-js
+			// Non-JS agents get a link to a footer menu
+			display: none;
+		}
+	}
 }
 
 .main-small-navigation {
-	position: absolute;
-	top: 0;
-	right: 0;
+	&.menu-visible {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
 
 	.menu {
 		display: none;
@@ -120,28 +120,22 @@ h1.menu-toggle {
 			display: block;
 		}
 	}
-
-	.admin-bar & {
-		// top: 28px;
-	}
 }
 
 // =Main Nav Skin
 .main-small-navigation {
-
 	z-index: 10;
+
 	li {
 		list-style: none;
 	}
 
 	a {
-		padding: 0.2em;
 		text-decoration: none;
 	}
 
 	a:hover,
 	a.hover {
-		background: #f5f5f5;
 	}
 
 	.menu {
@@ -153,17 +147,13 @@ h1.menu-toggle {
 }
 
 // =Pagination
-// -------------------------------------------
 
-.main-navigation {
-	margin: 0 0 1.5em;
-	overflow: hidden;
-}
-
+// =Sibling page navigation
 .nav-previous {
 	.pull-left();
 	width: 50%;
 }
+
 .nav-next {
 	.pull-right();
 	text-align: right;
