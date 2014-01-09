@@ -19,10 +19,13 @@
 @_breakpoint-2-width: '70em';
 
 // Public
+@breakpoint-0: ~'only screen and (min-width: 0)';
 @breakpoint-0-only: ~'only screen and (max-width: @{_breakpoint-1-width})';
 @breakpoint-1: ~'only screen and (min-width: @{_breakpoint-1-width})';
 @breakpoint-1-only: ~'only screen and (min-width: @{_breakpoint-1-width}) and (max-width: @{_breakpoint-2-width})';
 @breakpoint-2: ~'only screen and (min-width: @{_breakpoint-2-width})';
+
+@_mq_keywords: base small large;
 
 /**
  * Colours
