@@ -30,12 +30,15 @@ and Blueprint http://www.blueprintcss.org/
 // @import (reference) "less/mixins/icons";
 // @import (reference) "less/mixins/arrows";
 // @import (reference) "less/mixins/grids";
-@import (reference) "less/mixins/be";
+// @import (reference) "less/mixins/be";
 
 // These are pre-compiled less files created from less/generators/*.less
 // We do this so the resulting classes can be used as mixins and extends
-@import (reference) "less/generated/flesh";
-@import (reference) "less/generated/gutter";
+@import "less/generated/flesh";
+@import "less/generated/gutter";
+@import "less/generated/border";
+@import "less/generated/be";
+@import "less/generated/mq";
 
 // Meyer reset
 .reset();
