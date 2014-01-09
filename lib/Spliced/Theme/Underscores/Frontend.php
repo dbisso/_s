@@ -45,7 +45,8 @@ class Frontend {
 		// wp_enqueue_script( 'enquire', get_template_directory_uri() . '/js/vendor/enquire.js', null, null, true );
 		wp_enqueue_script( 'modernizr-custom', get_template_directory_uri() . '/js/vendor/modernizr-custom.js', null, '2.7.0', true );
 		wp_enqueue_script( 'jquery-uncomment', get_template_directory_uri() . '/js/vendor/jquery.uncomment.js', array( 'jquery' ), null, true );
-		wp_enqueue_script( 'small-menu', get_template_directory_uri() . '/js/small-menu.js', array( 'jquery', 'underscore', 'jquery-uncomment' ), microtime(), true );
+		wp_enqueue_script( 'dbisso-mq', get_template_directory_uri() . '/js/mq.js', array( 'jquery', 'underscore' ), microtime(), true );
+		wp_enqueue_script( 'small-menu', get_template_directory_uri() . '/js/small-menu.js', array( 'jquery', 'underscore', 'jquery-uncomment', 'dbisso-mq' ), microtime(), true );
 		wp_enqueue_script( '_s', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), null, true );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
