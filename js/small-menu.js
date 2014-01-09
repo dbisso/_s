@@ -22,7 +22,7 @@
 		var menus = this,
 			labels = menus.find( '.main-menu-label' );
 
-		$(document).bind( 'smallMenu:change', function ( e, size ) {
+		$(document).bind( 'smallMenu.change', function ( e, size ) {
 			switch( size ) {
 				case 'large':
 					menus.swapClass( 'main-small-navigation', 'main-navigation' );
@@ -44,15 +44,10 @@
 })(jQuery);
 
 (function($){
-	function maybeSmallMenu () {
-		// Breakpoint name is stored in hidden psudo element on body.
-		var breakpoint = String(getComputedStyle(document.body, '::before').content).replace(/"/g, '');
-		$(document).trigger( 'smallMenu:change', $.inArray( breakpoint, ['bp1', 'bp2'] ) >= 0 ? 'large' : 'small' );
-	}
-
 	// Bind the menu
 	$( '#site-navigation' ).smallMenu();
 
+	// Enable menu toggling
 	$( '.menu-toggle' ).attr('href', '#').click( function( event ) {
 		event.preventDefault();
 
@@ -71,9 +66,13 @@
 		}
 	});
 
-	// Bind to resize.
-	$(window).resize(_.debounce(maybeSmallMenu, 350));
+	function maybeSmallMenu( event, mqData ) {
+		var menuState = mqData.index >= 1 ? 'large' : 'small';
+		$(document).trigger( 'smallMenu.change', menuState );
+	}
 
-	// Trigger initial test.
-	maybeSmallMenu();
+	$(document).on( 'mq.change', maybeSmallMenu );
+
+	// Trigger initial change
+	$(document).trigger( 'mq.init' );
 })(jQuery);
