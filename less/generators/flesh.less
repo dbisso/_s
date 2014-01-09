@@ -1,10 +1,11 @@
 @import '../site/variables';
 
 ._flesh-loop (@index) when (@index <= length(@_width_keywords) ) {
-	@keyword: extract( @_width_keywords, @index );
-	@value: ~"@{_width_keyword_@{keyword}}";
+	@line: extract( @_width_keywords, @index );
+	@keyword: e(extract( @line, 1 ));
+	@value: extract( @line, 2 );
 
-		.flesh-above\:@{keyword} {
+	.flesh-above\:@{keyword} {
 		padding-top: @value;
 	}
 

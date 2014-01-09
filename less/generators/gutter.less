@@ -1,8 +1,10 @@
 @import '../site/variables';
 
 ._gutter-loop (@index) when (@index <= length(@_width_keywords)) {
-	@keyword: extract( @_width_keywords, @index );
-	@value: ~"@{_width_keyword_@{keyword}}";
+	@line: extract( @_width_keywords, @index );
+	@keyword: e(extract( @line, 1 ));
+	@value: extract( @line, 2 );
+
 	.gutter-above\:@{keyword} {
 		margin-top: @value;
 	}

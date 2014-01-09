@@ -58,10 +58,17 @@
 @flesh_size: @flesh-size;
 
 // Width keywords
-@_width_keywords: auto none thin normal wide;
-@_width_keyword_noop: noop;
-@_width_keyword_auto: auto;
-@_width_keyword_none: 0;
-@_width_keyword_thin: .5rem;
-@_width_keyword_normal: 1rem;
-@_width_keyword_wide: 2rem;
+@_width_keywords:
+	noop noop,
+	none 0,
+	thin .5rem,
+	normal 1rem,
+	wide 2rem;
+
+// Border keywords
+@_border_keywords: none light normal heavy fancy;
+@_border_keyword_none: 0;
+@_border_keyword_light: 1px solid tint( black, 90% );
+@_border_keyword_normal: 1px solid tint( black, 40% );
+@_border_keyword_heavy: 2px solid tint( black, 30% );
+@_border_keyword_fancy: 3px double tint( black, 30% );
