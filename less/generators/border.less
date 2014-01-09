@@ -1,0 +1,29 @@
+@import '../site/variables';
+
+._border-loop (@index) when (@index <= length(@_border_keywords)) {
+	@keyword: extract( @_border_keywords, @index );
+	@value: ~"@{_border_keyword_@{keyword}}";
+	.border-above\:@{keyword} {
+		border-top: @value;
+	}
+
+	.border-below\:@{keyword} {
+		border-bottom: @value;
+	}
+
+	.border-before\:@{keyword} {
+		border-left: @value;
+	}
+
+	.border-after\:@{keyword} {
+		border-right: @value;
+	}
+
+	.border-all\:@{keyword} {
+		border: @value;
+	}
+
+	._border-loop(@index + 1);
+}
+
+._border-loop(1);

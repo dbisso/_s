@@ -1,0 +1,30 @@
+@import '../site/variables';
+@import (reference) '../mixins/layout';
+@import (reference) '../mixins/helpers';
+@import '../mixins/be';
+
+._be-loop (@index) when (@index < length(@_mq_keywords) ) {
+	@keyword: extract( @_mq_keywords, @index );
+	@value: ~"@{breakpoint-@{index}}";
+
+	@media @value {
+		.be-grid( @index );
+		.be-visibility( @index );
+
+		.be-align-left-bp@{index} {
+			text-align: left;
+		}
+
+		.be-align-right-bp@{index} {
+			text-align: right;
+		}
+
+		.be-align-center-bp@{index} {
+			text-align: center;
+		}
+	}
+
+	._be-loop(@index + 1);
+}
+
+._be-loop(0);

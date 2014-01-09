@@ -1,0 +1,17 @@
+@import '../site/variables';
+
+// Stuff the viewport tag with MQ data for use in JS
+._mq-loop ( @index ) when ( @index < length( @_mq_keywords ) ) {
+	@keyword: extract( @_mq_keywords, @index + 1 );
+	@value: ~"@{breakpoint-@{index}}";
+
+	@media @value {
+		meta[name="viewport"] {
+			font-family: "@{index}, @{keyword}, @{value}";
+		}
+	}
+
+	._mq-loop( @index + 1 );
+}
+
+._mq-loop(0);
