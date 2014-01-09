@@ -115,13 +115,8 @@ and Blueprint http://www.blueprintcss.org/
 .string,
 [class*="gallery-columns"] {
   letter-spacing: -0.31em;
-  /* Webkit: collapse white-space between units */
   *letter-spacing: normal;
-  /* reset IE < 8 */
   *word-spacing: -0.43em;
-  /* IE < 8: collapse white-space between units */
-  text-rendering: optimizespeed;
-  /* Webkit: fixes text-rendering: optimizeLegibility */
 }
 .string > *,
 [class*="gallery-columns"] > * {
@@ -129,7 +124,6 @@ and Blueprint http://www.blueprintcss.org/
   vertical-align: top;
   letter-spacing: normal;
   word-spacing: normal;
-  text-rendering: auto;
 }
 .ie7 .string > *,
 .ie7 [class*="gallery-columns"] > * {
@@ -139,9 +133,7 @@ and Blueprint http://www.blueprintcss.org/
 .string .string,
 [class*="gallery-columns"] [class*="gallery-columns"] {
   letter-spacing: -0.31em;
-  /* webkit */
   *letter-spacing: normal;
-  /* IE6/7 reset */
 }
 .string .string .opera-only :-o-prefocus,
 .string .string .string,
@@ -149,11 +141,19 @@ and Blueprint http://www.blueprintcss.org/
 [class*="gallery-columns"] [class*="gallery-columns"] [class*="gallery-columns"] {
   word-spacing: -0.43em;
 }
+.string .string _fake,
+[class*="gallery-columns"] [class*="gallery-columns"] _fake {
+  display: inherit;
+}
 .string .opera-only :-o-prefocus,
 .string .string,
 [class*="gallery-columns"] .opera-only :-o-prefocus,
 [class*="gallery-columns"] [class*="gallery-columns"] {
   word-spacing: -0.43em;
+}
+.string _fake,
+[class*="gallery-columns"] _fake {
+  display: inherit;
 }
 .blocks > * {
   float: left;
@@ -246,6 +246,13 @@ and Blueprint http://www.blueprintcss.org/
 /**
  * Misc helpers
  */
+._ir {
+  border: 0;
+  font: 0/0 a;
+  text-indent: -9999em;
+  text-shadow: none;
+  color: transparent;
+}
 .visually-hidden,
 .screen-reader-text {
   border: 0;
@@ -1216,13 +1223,8 @@ label {
 }
 ._menu_dropdown .menu {
   letter-spacing: -0.31em;
-  /* Webkit: collapse white-space between units */
   *letter-spacing: normal;
-  /* reset IE < 8 */
   *word-spacing: -0.43em;
-  /* IE < 8: collapse white-space between units */
-  text-rendering: optimizespeed;
-  /* Webkit: fixes text-rendering: optimizeLegibility */
   list-style: none;
   margin: 0;
   padding-left: 0;
@@ -1232,7 +1234,6 @@ label {
   vertical-align: top;
   letter-spacing: normal;
   word-spacing: normal;
-  text-rendering: auto;
 }
 .ie7 ._menu_dropdown .menu > * {
   display: inline;
@@ -1241,9 +1242,7 @@ label {
 ._menu_dropdown .menu .string,
 ._menu_dropdown .menu [class*="gallery-columns"] {
   letter-spacing: -0.31em;
-  /* webkit */
   *letter-spacing: normal;
-  /* IE6/7 reset */
 }
 ._menu_dropdown .menu .string .opera-only :-o-prefocus,
 ._menu_dropdown .menu .string .string,
@@ -1251,10 +1250,17 @@ label {
 ._menu_dropdown .menu [class*="gallery-columns"] [class*="gallery-columns"] {
   word-spacing: -0.43em;
 }
+._menu_dropdown .menu .string _fake,
+._menu_dropdown .menu [class*="gallery-columns"] _fake {
+  display: inherit;
+}
 ._menu_dropdown .menu .opera-only :-o-prefocus,
 ._menu_dropdown .menu .string,
 ._menu_dropdown .menu [class*="gallery-columns"] {
   word-spacing: -0.43em;
+}
+._menu_dropdown .menu _fake {
+  display: inherit;
 }
 ._menu_dropdown .menu-item {
   position: relative;
