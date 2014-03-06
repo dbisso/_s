@@ -31,6 +31,34 @@ class Frontend {
 		return $classes;
 	}
 
+	public function filter_script_loader_src( $src, $handle ) {
+		global $wp_scripts;
+
+		// If filename-based caschebusting is enabled in the .htaccess file
+		// then remove the version from the query string and insert it before
+		// the file extension.
+		if ( function_exists( 'getenv' ) && 'on' === getenv( 'CACHEBUST_FILENAME' ) ) {
+			$script = $wp_scripts->registered[$handle];
+			$version = $script->ver;
+
+			if ( $version ) {
+				$version = strtr( $version, '.', '_' );
+
+				$parsed_url = parse_url( $src );
+
+				if ( $parsed_url['query'] ) {
+					unset( $parsed_url['query'] );
+				}
+
+				$parsed_url['path'] = preg_replace( '/\.js$/', ".$version.js", $parsed_url['path'] );
+
+				$src = $parsed_url['scheme'] . "://{$parsed_url['host']}{$parsed_url['path']}";
+			}
+		}
+
+		return $src;
+	}
+
 	/**
 	 * Enqueue scripts and styles
 	 */
