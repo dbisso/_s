@@ -64,11 +64,13 @@
 		}
 	});
 
+	// Trigger the menu change depending on MQ
 	function maybeSmallMenu( event, mqData ) {
 		var menuState = mqData.index >= 1 ? 'large' : 'small';
 		$(document).trigger( 'smallMenu.change', menuState );
 	}
 
+	// Bind to media query change
 	$(document).on( 'mq.change', maybeSmallMenu );
 
 	// Trigger initial change
