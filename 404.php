@@ -7,7 +7,7 @@
 use Spliced\Theme\Underscores as T;
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+	<div id="primary" class="<?php T\primary_content_class() ?>">
 		<main id="main" class="site-main" role="main">
 
 			<section class="error-404 not-found">

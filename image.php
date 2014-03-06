@@ -8,7 +8,7 @@ use Spliced\Theme\Underscores as T;
 get_header();
 ?>
 
-	<div id="primary" class="content-area image-attachment">
+	<div id="primary" class="<?php T\primary_content_class( 'image-attachment' ) ?>">
 		<main id="main" class="site-main" role="main">
 
 		<?php while ( have_posts() ) : the_post(); ?>
