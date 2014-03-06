@@ -68,14 +68,48 @@ class Frontend {
 		// Default Stylesheet
 		wp_enqueue_style( 'style', get_stylesheet_directory_uri() . '/style.css', null, null );
 
-		wp_enqueue_script( 'skip-link-focus', get_template_directory_uri() . '/js/skip-link-focus-fix.js', null, null, true );
 		wp_enqueue_script( 'respond', 'http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js', null, null, false );
-		// wp_enqueue_script( 'enquire', get_template_directory_uri() . '/js/vendor/enquire.js', null, null, true );
-		wp_enqueue_script( 'modernizr-custom', get_template_directory_uri() . '/js/vendor/modernizr-custom.js', null, '2.7.0', true );
-		wp_enqueue_script( 'jquery-uncomment', get_template_directory_uri() . '/js/vendor/jquery.uncomment.js', array( 'jquery' ), null, true );
-		wp_enqueue_script( 'dbisso-mq', get_template_directory_uri() . '/js/mq.js', array( 'jquery', 'underscore' ), microtime(), true );
-		wp_enqueue_script( 'small-menu', get_template_directory_uri() . '/js/small-menu.js', array( 'jquery', 'underscore', 'jquery-uncomment', 'dbisso-mq' ), microtime(), true );
-		wp_enqueue_script( '_s', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), null, true );
+
+		$scripts = array(
+			array( 'skip-link-focus', 'skip-link-focus-fix.js' ),
+			array( 'modernizr-custom', 'vendor/modernizr-custom.js', null, '2.7.0' ),
+			array( 'jquery-uncomment', 'vendor/jquery.uncomment.js', array('jquery') ),
+			array(
+				'dbisso-mq', 'mq.js',
+				array( 'jquery', 'underscore' ),
+			),
+			array(
+				'small-menu', 'small-menu.js',
+				array( 'jquery', 'underscore', 'jquery-uncomment', 'dbisso-mq' ),
+			),
+			array( '_s', 'script.js', array( 'jquery' ) ),
+		);
+
+		foreach ( $scripts as $script ) {
+			list( $handle, $file, $deps, $version, $footer ) = $script;
+
+			// TODO: put this in the local-config
+			define( 'SCRIPT_VERSION_MTIME', true );
+
+			// Version our added scripts by the file mod time
+			if ( defined( 'SCRIPT_VERSION_MTIME' ) && true === SCRIPT_VERSION_MTIME ) {
+				if ( is_null( $version ) ) {
+					// Use file mod time for timestamp
+					$version = filemtime( trailingslashit( get_template_directory() ) . "js/$file" );
+				} else {
+					// Replace . in version strings with _
+					$version = strtr( $version, '.', '_' );
+				}
+			}
+
+			$file = trailingslashit( get_template_directory_uri() ) . "js/$file";
+
+			// Place in footer by deafault
+			if ( is_null( $footer ) )
+				$footer = true;
+
+			wp_enqueue_script( $handle, $file, $deps, $version, $footer );
+		}
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
