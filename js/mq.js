@@ -47,9 +47,9 @@
 			}
 
 			return {
-				mediaQuery: mqData[2].trim(),
-				label: mqData[1].trim(),
-				index: Number(mqData[0].trim())
+				mediaQuery: $.trim(mqData[2]),
+				label: $.trim(mqData[1]),
+				index: Number($.trim(mqData[0]))
 			};
 		}
 	}
