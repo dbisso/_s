@@ -25,7 +25,8 @@
 	 * Holds the last known media query data object
 	 * @type {Boolean|Object}
 	 */
-	var current = false;
+	var current = false,
+		delay = 350;
 
 	/**
 	 * Retrieve the current active media query data from viewport meta element
@@ -67,7 +68,7 @@
 	}
 
 	// Bind to debounced resize event
-	$(window).resize(_.debounce(maybeTriggerChange, 350));
+	$(window).resize(_.debounce(maybeTriggerChange, delay));
 
 
 	// Allow others to trigger initial test after they have bound their events.
@@ -80,6 +81,7 @@
 	 */
 	DBisso.MQ = {
 		maybeTriggerChange: maybeTriggerChange,
-		getCurrent: getCurrent
+		getCurrent: getCurrent,
+		delay: delay
 	};
 })( jQuery, window.DBisso = window.DBisso || {} );
