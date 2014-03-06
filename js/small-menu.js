@@ -35,8 +35,6 @@
 					menus.insertBefore( '.site' );
 					break;
 			}
-
-			menus.uncomment();
 		});
 
 		return this;
@@ -45,9 +43,9 @@
 
 (function($){
 	// Bind the menu
-	$( '#site-navigation' ).smallMenu();
+	$( '#site-navigation' ).smallMenu().uncomment();
 
-	// Enable menu toggling
+	// Enable click/touch to reveal
 	$( '.menu-toggle' ).attr('href', '#').click( function( event ) {
 		event.preventDefault();
 
