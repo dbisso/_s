@@ -68,8 +68,6 @@ class Frontend {
 		// Default Stylesheet
 		wp_enqueue_style( 'style', get_stylesheet_directory_uri() . '/style.css', null, null );
 
-		wp_enqueue_script( 'respond', 'http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js', null, null, false );
-
 		$scripts = array(
 			array( 'skip-link-focus', 'skip-link-focus-fix.js' ),
 			array( 'modernizr-custom', 'vendor/modernizr-custom.js', null, '2.8.3' ),
