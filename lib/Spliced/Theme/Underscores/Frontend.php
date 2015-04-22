@@ -34,7 +34,7 @@ class Frontend {
 	public static function filter_script_loader_src( $src, $handle ) {
 		global $wp_scripts;
 
-		// If filename-based caschebusting is enabled in the .htaccess file
+		// If filename-based cachebusting is enabled in the .htaccess file
 		// then remove the version from the query string and insert it before
 		// the file extension.
 		if ( function_exists( 'getenv' ) && 'on' === getenv( 'CACHEBUST_FILENAME' ) ) {
