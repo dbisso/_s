@@ -5,8 +5,9 @@ class Frontend {
 	static $hooker;
 
 	public function bootstrap( $hooker = null ) {
-		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) )
+		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
+		}
 
 		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
