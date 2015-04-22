@@ -26,7 +26,6 @@ class Core {
 		// PostTypes::bootstrap( $hooker );
 		// Taxonomies::bootstrap( $hooker );
 		// Plugins::bootstrap( $hooker );
-		// Insert::bootstrap( $hooker );
 
 		if ( is_admin() ) {
 			Admin::bootstrap( $hooker );
