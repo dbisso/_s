@@ -31,6 +31,17 @@ class Frontend {
 		return $classes;
 	}
 
+	/**
+	 * Replaces query arg based cachebusting with filename-based cachebusting.
+	 * Eg: /js/myscript.js?v=2.42 becomes /js/myscript.2_42.js
+	 *
+	 * Requires CACHEBUST_FILENAME env var to be set to 'on' as rewrite rules
+	 * need to be set up correctly on the server side for this to work.
+	 *
+	 * @param  string $src    The script source URL
+	 * @param  script $handle The script handle
+	 * @return string         The modified source URL
+	 */
 	public static function filter_script_loader_src( $src, $handle ) {
 		global $wp_scripts;
 
