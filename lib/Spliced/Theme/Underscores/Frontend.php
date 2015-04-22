@@ -83,11 +83,21 @@ class Frontend {
 			array( '_s', 'script.js', array( 'jquery' ) ),
 		);
 
+		self::version_scripts( $scripts );
+
+		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
+	}
+
+	/**
+	 * Defaults the version parameter for scripts to the script file's mtime.
+	 *
+	 * @param  array  $scripts The scripts to enqueue
+	 */
+	public static function version_scripts( array $scripts ) {
 		foreach ( $scripts as $script ) {
 			list( $handle, $file, $deps, $version, $footer ) = $script;
-
-			// TODO: put this in the local-config
-			define( 'SCRIPT_VERSION_MTIME', true );
 
 			// Version our added scripts by the file mod time
 			if ( defined( 'SCRIPT_VERSION_MTIME' ) && true === SCRIPT_VERSION_MTIME ) {
@@ -108,11 +118,7 @@ class Frontend {
 			}
 
 			wp_enqueue_script( $handle, $file, $deps, $version, $footer );
-		}
-
-		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-			wp_enqueue_script( 'comment-reply' );
-		}
+		};
 	}
 
 	public static function theme_filter_primary_content_class( array $classes ) {
