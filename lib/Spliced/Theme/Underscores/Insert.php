@@ -5,8 +5,9 @@ class Insert {
 	static $hooker;
 
 	public function bootstrap( $hooker = null ) {
-		if ( !$hooker || !method_exists( $hooker, 'hook' ) )
+		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
+		}
 
 		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
@@ -16,7 +17,7 @@ class Insert {
 	}
 
 	function after_tag( $tag, $count, $content, $insertion ) {
-		if ( !function_exists( 'mb_convert_encoding' ) ) {
+		if ( ! function_exists( 'mb_convert_encoding' ) ) {
 			trigger_error( 'Function insert_after_paragraph requires the PHP mbstring extension' );
 			return $content;
 		}
@@ -25,7 +26,7 @@ class Insert {
 		$dom = new \DomDocument( '1.0', 'utf-8' );
 
 		// Convert encoding to preserve entities
-		if ( !empty( $content ) && $dom->loadHTML( mb_convert_encoding( (string) $content, 'HTML-ENTITIES', 'UTF-8' ) ) ) {
+		if ( ! empty( $content ) && $dom->loadHTML( mb_convert_encoding( (string) $content, 'HTML-ENTITIES', 'UTF-8' ) ) ) {
 			$xp      = new \DOMXPath( $dom );
 			$p_nodes = $xp->query( '//' . $tag );
 			$count   = (int) $count;
@@ -55,7 +56,9 @@ class Insert {
 			$meta = '<span class="edit"><a class="post-edit-link" href="' . get_edit_post_link( $post->ID ) . '" title="' . sprintf( esc_attr__( 'Edit %1$s', '_s' ), $post_type->labels->singular_name ) . '">' . __( 'Edit', '_s' ) . '</a></span>';
 		}
 
-		if ( !empty( $meta )  ) $meta = '<p class="entry-meta">' . $meta . '</p>';
+		if ( ! empty( $meta )  ) {
+			$meta = '<p class="entry-meta">' . $meta . '</p>';
+		}
 
 		return apply_filters( 'the_content' , $post->post_content ) . $meta;
 	}
@@ -69,7 +72,9 @@ class Insert {
 	public function include_post( $slug ) {
 		static $posts = array();
 
-		if ( isset( $posts[$slug] ) ) return $posts[$slug];
+		if ( isset( $posts[ $slug ] ) ) {
+			return $posts[ $slug ];
+		}
 
 		$args = array(
 		  'name' => $slug,
@@ -81,7 +86,7 @@ class Insert {
 		$post = get_posts( $args );
 		$post = $post[0];
 
-		$posts[$slug] = $post;
+		$posts[ $slug ] = $post;
 
 		return $post;
 	}

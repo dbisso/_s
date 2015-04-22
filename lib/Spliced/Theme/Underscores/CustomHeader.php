@@ -7,14 +7,14 @@ use Spliced\Theme\Underscores as T;
  * http://codex.wordpress.org/Custom_Headers
  *
  * You can add an optional custom header image to header.php like so ...
-
-	<?php $header_image = get_header_image();
-	if ( ! empty( $header_image ) ) { ?>
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-			<img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="">
-		</a>
-	<?php } // if ( ! empty( $header_image ) ) ?>
-
+ *
+ *	<?php $header_image = get_header_image();
+ *	if ( ! empty( $header_image ) ) { ?>
+ *		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr(  get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+ *			<img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="">
+ *		</a>
+ *	<?php } // if ( ! empty( $header_image ) ) ?>
+ *
  *
  * @package _s
  */
@@ -22,8 +22,9 @@ class CustomHeader {
 	static $hooker;
 
 	public function bootstrap( $hooker = null ) {
-		if ( !$hooker || !method_exists( $hooker, 'hook' ) )
+		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
+		}
 
 		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
@@ -66,8 +67,9 @@ class CustomHeader {
 
 		// If no custom options for text are set, let's bail
 		// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value
-		if ( HEADER_TEXTCOLOR == $header_text_color )
+		if ( HEADER_TEXTCOLOR == $header_text_color ) {
 			return;
+		}
 
 		// If we get this far, we have custom styles. Let's do this.
 		?>

@@ -9,7 +9,7 @@ use Spliced\Theme\Underscores as T;
  * @return string          Class attribute string
  */
 function primary_content_class( array $classes = array() ) {
-  echo esc_attr( implode( ' ', apply_filters( '_s_primary_content_class', $classes ) ) );
+	echo esc_attr( implode( ' ', apply_filters( '_s_primary_content_class', $classes ) ) );
 }
 
 /**
@@ -17,8 +17,9 @@ function primary_content_class( array $classes = array() ) {
  *
  * @package _s
  */
-if ( ! isset( $content_width ) )
+if ( ! isset( $content_width ) ) {
 	$content_width = 640; /* pixels */
+}
 
 /**
  * Display navigation to next/previous set of posts when applicable.
@@ -67,7 +68,7 @@ function post_nav() {
 		<div class="nav-links">
 			<?php
 				previous_post_link( '<div class="nav-previous">%link</div>', _x( '<span class="meta-nav">&larr;</span> %title', 'Previous post link', '_s' ) );
-				next_post_link(     '<div class="nav-next">%link</div>',     _x( '%title <span class="meta-nav">&rarr;</span>', 'Next post link',     '_s' ) );
+				next_post_link( '<div class="nav-next">%link</div>', _x( '%title <span class="meta-nav">&rarr;</span>', 'Next post link', '_s' ) );
 			?>
 		</div><!-- .nav-links -->
 	</nav><!-- .navigation -->
@@ -154,7 +155,7 @@ function the_attached_image() {
 		'post_type'      => 'attachment',
 		'post_mime_type' => 'image',
 		'order'          => 'ASC',
-		'orderby'        => 'menu_order ID'
+		'orderby'        => 'menu_order ID',
 	) );
 
 	// If there is more than 1 attachment in a gallery...
@@ -167,12 +168,12 @@ function the_attached_image() {
 		}
 
 		// get the URL of the next image attachment...
-		if ( $next_id )
+		if ( $next_id ) {
 			$next_attachment_url = get_attachment_link( $next_id );
-
-		// or get the URL of the first image attachment.
-		else
+		} else {
+			// or get the URL of the first image attachment.
 			$next_attachment_url = get_attachment_link( array_shift( $attachment_ids ) );
+		}
 	}
 
 	printf( '<a href="%1$s" title="%2$s" rel="attachment">%3$s</a>',

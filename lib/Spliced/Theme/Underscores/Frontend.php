@@ -38,7 +38,7 @@ class Frontend {
 		// then remove the version from the query string and insert it before
 		// the file extension.
 		if ( function_exists( 'getenv' ) && 'on' === getenv( 'CACHEBUST_FILENAME' ) ) {
-			$script = $wp_scripts->registered[$handle];
+			$script = $wp_scripts->registered[ $handle ];
 			$version = $script->ver;
 
 			if ( $version ) {
@@ -73,7 +73,7 @@ class Frontend {
 		$scripts = array(
 			array( 'skip-link-focus', 'skip-link-focus-fix.js' ),
 			array( 'modernizr-custom', 'vendor/modernizr-custom.js', null, '2.7.0' ),
-			array( 'jquery-uncomment', 'vendor/jquery.uncomment.js', array('jquery') ),
+			array( 'jquery-uncomment', 'vendor/jquery.uncomment.js', array( 'jquery' ) ),
 			array(
 				'dbisso-mq', 'mq.js',
 				array( 'jquery', 'underscore' ),
@@ -105,8 +105,9 @@ class Frontend {
 			$file = trailingslashit( get_template_directory_uri() ) . "js/$file";
 
 			// Place in footer by deafault
-			if ( is_null( $footer ) )
+			if ( is_null( $footer ) ) {
 				$footer = true;
+			}
 
 			wp_enqueue_script( $handle, $file, $deps, $version, $footer );
 		}
@@ -130,28 +131,34 @@ class Frontend {
 		$link_touch_icon = '<link rel="apple-touch-icon-precomposed" sizes="%s" href="' . $stylesheet_images_url . 'apple-touch-icon-%s" />';
 
 		// Add favicon if it exists
-		if ( file_exists( "{$stylesheet_images_dir}favicon.ico" ) )
+		if ( file_exists( "{$stylesheet_images_dir}favicon.ico" ) ) {
 			printf( $link, 'shortcut icon', "{$stylesheet_images_url}favicon.ico" );
+		}
 
 		// Add iOS home screen icons if they exist
 		foreach ( array( '144', '114', '72', '57' ) as $size ) {
 			$sizes = empty( $size ) ? '' : "{$size}x{$size}";
-			if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon-{$sizes}-precomposed.png" ) )
-					printf( $link_touch_icon, $sizes, "{$sizes}-precomposed.png" );
+			if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon-{$sizes}-precomposed.png" ) ) {
+				printf( $link_touch_icon, $sizes, "{$sizes}-precomposed.png" );
+			}
 		}
 
-		if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon-precomposed.png" ) )
+		if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon-precomposed.png" ) ) {
 			printf( $link, 'apple-touch-icon-precomposed', "{$stylesheet_images_url}apple-touch-icon-precomposed.png" );
+		}
 
-		if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon.png" ) )
+		if ( file_exists( "{$stylesheet_images_dir}apple-touch-icon.png" ) ) {
 			printf( $link, 'apple-touch-icon-precomposed', "{$stylesheet_images_url}apple-touch-icon.png" );
+		}
 
 		// Set home screen title
-		printf( '<meta name="%s" content="%s">', 'apple-mobile-web-app-title', __( get_bloginfo( 'name', 'raw' ) , '_s' ) );
+		printf( '<meta name="%s" content="%s">', 'apple-mobile-web-app-title', esc_attr__( get_bloginfo( 'name', 'raw' ) , '_s' ) );
 	}
 
 	public function action_wp_footer() {
-		if ( defined( 'WP_LOCAL_DEV' ) && true === WP_LOCAL_DEV ) echo '<div style="position: fixed; background: red; width: 20%; padding: 0.2em; bottom: 0; right: 0; color:white; font-size: 0.8em;">Local Development Mode</div>';
+		if ( defined( 'WP_LOCAL_DEV' ) && true === WP_LOCAL_DEV ) {
+			echo '<div style="position: fixed; background: red; width: 20%; padding: 0.2em; bottom: 0; right: 0; color:white; font-size: 0.8em;">Local Development Mode</div>';
+		}
 	}
 
 	public function filter_use_default_gallery_style( $use_style ) {
