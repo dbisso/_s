@@ -26,7 +26,6 @@ class Frontend {
 	}
 
 	public static function action_post_class( array $classes ) {
-		$classes[] = 'stream';
 		$classes[] = 'entry';
 
 		return $classes;
