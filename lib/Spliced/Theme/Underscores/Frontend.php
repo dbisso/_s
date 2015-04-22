@@ -72,7 +72,7 @@ class Frontend {
 
 		$scripts = array(
 			array( 'skip-link-focus', 'skip-link-focus-fix.js' ),
-			array( 'modernizr-custom', 'vendor/modernizr-custom.js', null, '2.7.0' ),
+			array( 'modernizr-custom', 'vendor/modernizr-custom.js', null, '2.8.3' ),
 			array( 'jquery-uncomment', 'vendor/jquery.uncomment.js', array( 'jquery' ) ),
 			array(
 				'dbisso-mq', 'mq.js',
