@@ -1,14 +1,12 @@
 <?php
 namespace Spliced\Theme\Underscores;
 
+use DBisso\Util\HookerInterface;
+
 class Admin {
 	public static $hooker;
 
-	public static function bootstrap( $hooker = null ) {
-		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
-			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
-		}
-
+	public static function bootstrap( HookerInterface $hooker ) {
 		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
 

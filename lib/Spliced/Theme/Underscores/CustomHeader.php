@@ -1,6 +1,8 @@
 <?php
 namespace Spliced\Theme\Underscores;
+
 use Spliced\Theme\Underscores as T;
+use DBisso\Util\HookerInterface;
 
 /**
  * Sample implementation of the Custom Header feature
@@ -21,11 +23,7 @@ use Spliced\Theme\Underscores as T;
 class CustomHeader {
 	public static $hooker;
 
-	public static function bootstrap( $hooker = null ) {
-		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
-			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
-		}
-
+	public static function bootstrap( HookerInterface $hooker ) {
 		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
 
