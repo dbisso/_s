@@ -7,9 +7,9 @@ namespace Spliced\Theme\Underscores;
  * @package _s
  */
 class Customizer {
-	static $hooker;
+	public static $hooker;
 
-	public function bootstrap( $hooker = null ) {
+	public static function bootstrap( $hooker = null ) {
 		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 		}
@@ -22,7 +22,7 @@ class Customizer {
 	 *
 	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
 	 */
-	function action_customize_register( $wp_customize ) {
+	public static function action_customize_register( $wp_customize ) {
 		$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 		$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 		$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';

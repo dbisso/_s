@@ -9,10 +9,11 @@ namespace Spliced\Theme\Underscores;
  *
  */
 class Core {
-	static $hooker;
 	const HOOK_PREFIX = '_s';
 
-	public function bootstrap( $hooker = null ) {
+	public static $hooker;
+
+	public static function bootstrap( $hooker = null ) {
 		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 		}
@@ -34,7 +35,7 @@ class Core {
 		}
 	}
 
-	public function action_after_switch_theme( $name, $theme ) {
+	public static function action_after_switch_theme( $name, $theme ) {
 		update_option( 'permalink_structure', '/%postname%/' );
 		update_option( 'uploads_use_yearmonth_folders', 0 );
 		flush_rewrite_rules( true );
@@ -49,7 +50,7 @@ class Core {
 	 *
 	 * @since _s 1.0
 	 */
-	public function action_after_setup_theme() {
+	public static function action_after_setup_theme() {
 		load_theme_textdomain( '_s', get_template_directory() . '/languages' );
 
 		add_theme_support( 'automatic-feed-links' );
@@ -74,7 +75,7 @@ class Core {
 	 *
 	 * @since _s 1.0
 	 */
-	public function action_widgets_init() {
+	public static function action_widgets_init() {
 		register_sidebar(
 			array(
 				'name'          => __( 'Sidebar', '_s' ),

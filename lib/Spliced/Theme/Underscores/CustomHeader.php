@@ -19,9 +19,9 @@ use Spliced\Theme\Underscores as T;
  * @package _s
  */
 class CustomHeader {
-	static $hooker;
+	public static $hooker;
 
-	public function bootstrap( $hooker = null ) {
+	public static function bootstrap( $hooker = null ) {
 		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 		}
@@ -38,7 +38,7 @@ class CustomHeader {
 	 *
 	 * @package _s
 	 */
-	public function action_after_setup_theme() {
+	public static function action_after_setup_theme() {
 		add_theme_support(
 			'custom-header',
 			apply_filters(
@@ -62,7 +62,7 @@ class CustomHeader {
 	 *
 	 * @see _s_custom_header_setup().
 	 */
-	function header_style() {
+	public static function header_style() {
 		$header_text_color = get_header_textcolor();
 
 		// If no custom options for text are set, let's bail
@@ -101,7 +101,7 @@ class CustomHeader {
 	 *
 	 * @see custom_header_setup().
 	 */
-	function admin_header_image() {
+	public static function admin_header_image() {
 		$style        = sprintf( ' style="color:#%s;"', get_header_textcolor() );
 		$header_image = get_header_image();
 	?>
@@ -120,7 +120,7 @@ class CustomHeader {
 	 *
 	 * @see custom_header_setup().
 	 */
-	function admin_header_style() {
+	public static function admin_header_style() {
 	?>
 		<style type="text/css">
 			.appearance_page_custom-header #headimg {

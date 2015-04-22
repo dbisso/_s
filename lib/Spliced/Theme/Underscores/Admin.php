@@ -2,9 +2,9 @@
 namespace Spliced\Theme\Underscores;
 
 class Admin {
-	static $hooker;
+	public static $hooker;
 
-	public function bootstrap( $hooker = null ) {
+	public static function bootstrap( $hooker = null ) {
 		if ( ! $hooker || ! method_exists( $hooker, 'hook' ) ) {
 			throw new \BadMethodCallException( 'Bad Hooking Class. Check that \DBisso\Util\Hooker is loaded.', 1 );
 		}
@@ -12,9 +12,9 @@ class Admin {
 		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
 
-	function action_admin_enqueue_scripts() {}
+	public static function action_admin_enqueue_scripts() {}
 
-	public function filter_custom_menu_order() {
+	public static function filter_custom_menu_order() {
 		return true;
 	}
 
@@ -23,7 +23,7 @@ class Admin {
 	 * @param  array  $menu_order current admin menu items
 	 * @return array  Filtered menu items
 	 */
-	function filter_admin_menu() {
+	public static function filter_admin_menu() {
 		global $menu, $submenu;
 		static $wp_hook_priority = 13;
 
@@ -64,7 +64,7 @@ class Admin {
 		return $menu_order;
 	}
 
-	function action_wp_dashboard_setup() {
+	public static function action_wp_dashboard_setup() {
 		wp_add_dashboard_widget( 'spliced_welcome', 'Welcome to your site', array( __CLASS__, 'widget_dashboard_welcome' ) );
 		remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 		remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
@@ -76,7 +76,7 @@ class Admin {
 		remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
 	}
 
-	function widget_dashboard_welcome() {
+	public static function widget_dashboard_welcome() {
 		$user = wp_get_current_user();
 		?>
 		<h4>Hello <?php echo esc_html( get_user_meta( $user->id, 'nickname', true ) ) ?>,</h4>
