@@ -1,0 +1,46 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "0263b00c02f1f0c477edd2033c88bf28",
+    "packages": [
+        {
+            "name": "dbisso/hooker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dbisso/Hooker",
+                "reference": "06b6f08955eb057f4cb396d660a3b9e9aac87034"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "GPL2"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Bissonnet",
+                    "email": "dan@danisadesigner.com"
+                }
+            ],
+            "description": "Auto class hooking for WordPress development",
+            "time": "2015-04-22 17:19:40"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "dbisso/hooker": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
