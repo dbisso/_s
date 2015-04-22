@@ -54,12 +54,19 @@
 
 		menu.trigger( 'menu.show' );
 
-		// Don't respond if menu is not in small mode
+		// Only respond if menu is in small mode
 		if ( menu.hasClass( 'main-small-navigation' ) ) {
 			var labelText = label.text();
 			$('body').toggleClass( 'menu-visible' );
 			menu.toggleClass( 'menu-visible' );
 			label.toggleClass( 'menu-visible' );
+
+			if ( menu.hasClass( 'menu-visible' ) ) {
+				label.attr( 'aria-expanded', true );
+			} else {
+				label.attr( 'aria-expanded', false );
+			}
+
 			label.text( label.data( 'label-alt' ) ).data( 'label-alt', labelText );
 		}
 	});

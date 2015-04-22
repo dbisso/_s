@@ -36,7 +36,7 @@ use Spliced\Theme\Underscores as T;
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 				<p class="site-description"><?php bloginfo( 'description' ); ?></p>
 			</div>
-			<button class="menu-toggle main-menu-label" data-menu="site-navigation" href="#tertiary"><?php _e( 'Menu', '_s' ); ?></button>
+			<button class="menu-toggle main-menu-label" data-menu="site-navigation" href="#tertiary" aria-control="site-navigation" aria-expanded="false"><?php _e( 'Menu', '_s' ); ?></button>
 			<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', '_s' ); ?></a>
 			<nav id="site-navigation" class="main-navigation" role="navigation">
 				<!--
