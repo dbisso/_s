@@ -3,16 +3,17 @@ namespace Spliced\Theme\Underscores;
 
 use DBisso\Util\HookerInterface;
 
+/**
+ * Add functionality to the admin side of WordPress.
+ */
 class Admin {
-	public static $hooker;
-
-	public static function bootstrap( HookerInterface $hooker ) {
-		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
+	public function __construct( HookerInterface $hooker ) {
+		$hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
 
-	public static function action_admin_enqueue_scripts() {}
+	public function action_admin_enqueue_scripts() {}
 
-	public static function filter_custom_menu_order() {
+	public function filter_custom_menu_order() {
 		return true;
 	}
 
@@ -21,7 +22,7 @@ class Admin {
 	 * @param  array  $menu_order current admin menu items
 	 * @return array  Filtered menu items
 	 */
-	public static function filter_admin_menu() {
+	public function filter_admin_menu() {
 		global $menu, $submenu;
 		static $wp_hook_priority = 13;
 
@@ -62,7 +63,7 @@ class Admin {
 		return $menu_order;
 	}
 
-	public static function action_wp_dashboard_setup() {
+	public function action_wp_dashboard_setup() {
 		wp_add_dashboard_widget( 'spliced_welcome', 'Welcome to your site', array( __CLASS__, 'widget_dashboard_welcome' ) );
 		remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 		remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );

@@ -3,14 +3,17 @@ namespace Spliced\Theme\Underscores;
 
 use DBisso\Util\HookerInterface;
 
+/**
+ * Adds functionality to front end of site.
+ */
 class Frontend {
 	public static $hooker;
 
-	public static function bootstrap( HookerInterface $hooker ) {
-		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
+	public function __construct( HookerInterface $hooker ) {
+		$hooker->hook( $this, $hooker->hook_prefix );
 	}
 
-	public static function action_after_setup_theme() {
+	public function action_after_setup_theme() {
 		// Include the custom template functions
 		require( __DIR__ . '/helpers-template.php' );
 	}
@@ -19,11 +22,11 @@ class Frontend {
 	 * Set js class on html as early as possible
 	 * @return [type] [description]
 	 */
-	public static function action_before() {
+	public function action_before() {
 ?><script type="text/javascript">document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className.replace('no-js','js');</script><?php
 	}
 
-	public static function action_post_class( array $classes ) {
+	public function action_post_class( array $classes ) {
 		$classes[] = 'entry';
 
 		return $classes;
@@ -40,7 +43,7 @@ class Frontend {
 	 * @param  script $handle The script handle
 	 * @return string         The modified source URL
 	 */
-	public static function filter_script_loader_src( $src, $handle ) {
+	public function filter_script_loader_src( $src, $handle ) {
 		global $wp_scripts;
 
 		// If filename-based cachebusting is enabled in the .htaccess file
@@ -71,7 +74,7 @@ class Frontend {
 	/**
 	 * Enqueue scripts and styles
 	 */
-	public static function action_wp_enqueue_scripts() {
+	public function action_wp_enqueue_scripts() {
 		$post = get_post();
 
 		// Default Stylesheet
@@ -92,7 +95,7 @@ class Frontend {
 			array( '_s', 'script.js', array( 'jquery' ) ),
 		);
 
-		self::version_scripts( $scripts );
+		$this->version_scripts( $scripts );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
@@ -130,13 +133,13 @@ class Frontend {
 		};
 	}
 
-	public static function theme_filter_primary_content_class( array $classes ) {
+	public function theme_filter_primary_content_class( array $classes ) {
 		$classes[] = 'site-primary';
 
 		return $classes;
 	}
 
-	public static function action_wp_head(){
+	public function action_wp_head(){
 		$stylesheet_images_url = trailingslashit( get_stylesheet_directory_uri() ) . 'images/';
 		$stylesheet_images_dir = trailingslashit( get_stylesheet_directory() ) . 'images/';
 
@@ -168,13 +171,13 @@ class Frontend {
 		printf( '<meta name="%s" content="%s">', 'apple-mobile-web-app-title', esc_attr__( get_bloginfo( 'name', 'raw' ) , '_s' ) );
 	}
 
-	public static function action_wp_footer() {
+	public function action_wp_footer() {
 		if ( defined( 'WP_LOCAL_DEV' ) && true === WP_LOCAL_DEV ) {
 			echo '<div style="position: fixed; background: red; width: 20%; padding: 0.2em; bottom: 0; right: 0; color:white; font-size: 0.8em;">Local Development Mode</div>';
 		}
 	}
 
-	public static function filter_use_default_gallery_style( $use_style ) {
+	public function filter_use_default_gallery_style( $use_style ) {
 		return false;
 	}
 
