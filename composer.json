@@ -2,6 +2,7 @@
     "name": "dbisso/underscores",
     "description": "Fork of _s starter theme",
     "license": "GPLv2",
+    "type": "wordpress-theme",
     "authors": [
         {
             "name": "Dan Bissonnet",
