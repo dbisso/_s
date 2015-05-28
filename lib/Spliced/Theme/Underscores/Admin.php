@@ -8,7 +8,7 @@ use DBisso\Util\HookerInterface;
  */
 class Admin {
 	public function __construct( HookerInterface $hooker ) {
-		$hooker->hook( __CLASS__, $hooker->hook_prefix );
+		$hooker->hook( $this, $hooker->get_prefix() );
 	}
 
 	public function action_admin_enqueue_scripts() {}
