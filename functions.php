@@ -4,20 +4,15 @@
  *
  * @package _s
  */
-$loader = include_once __DIR__ . '/vendor/autoload.php';
-$loader->add( 'DBisso', __DIR__ . '/lib' );
-$loader->add( 'Spliced', __DIR__ . '/lib' );
 
-/**
- * Bootstrap or die
- */
-try {
-	if ( class_exists( '\DBisso\Util\Hooker' ) ) {
-		$hooker = new DBisso\Util\Hooker;
-		Spliced\Theme\Underscores\Core::bootstrap( $hooker );
-	} else {
-		throw new \Exception( 'Class DBisso\Util\Hooker not found. Check that the plugin is installed.', 1 );
-	}
-} catch ( \Exception $e ) {
-	wp_die( $e->getMessage(), $title = 'Theme Exception' );
+if ( version_compare( phpversion(), '5.3.5', '<' ) ) {
+	wp_die( 'This theme requires PHP version 5.3.5 or higher' );
+} else {
+	$loader = include_once __DIR__ . '/vendor/autoload.php';
+	$loader->add( 'DBisso', __DIR__ . '/lib' );
+	$loader->add( 'Spliced', __DIR__ . '/lib' );
+
+	// Call the bootstrap.
+	include_once __DIR__ . '/bootstrap.php';
 }
+

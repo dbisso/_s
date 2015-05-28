@@ -9,10 +9,8 @@ use DBisso\Util\HookerInterface;
  * @package _s
  */
 class Customizer {
-	public static $hooker;
-
-	public static function bootstrap( HookerInterface $hooker ) {
-		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
+	public function __construct( HookerInterface $hooker ) {
+		$hooker->hook( $this, $hooker->hook_prefix );
 	}
 
 	/**
@@ -20,7 +18,7 @@ class Customizer {
 	 *
 	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
 	 */
-	public static function action_customize_register( $wp_customize ) {
+	public function action_customize_register( $wp_customize ) {
 		$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 		$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 		$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';

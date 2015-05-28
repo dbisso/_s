@@ -7,32 +7,26 @@ use DBisso\Util\HookerInterface;
  * Core theme class
  *
  * Mainly for registering site-wide features and settings (post types, menus etc)
- * Bootstraps the Frontend or Admin class as needed
- *
  */
 class Core {
+	/**
+	 * @const Set the theme prefix.
+	 */
 	const HOOK_PREFIX = '_s';
 
-	public static $hooker;
-
-	public static function bootstrap( HookerInterface $hooker ) {
-		self::$hooker = $hooker->hook( __CLASS__, self::HOOK_PREFIX );
-
-		// CustomHeader::bootstrap( $hooker );
-		// Updates::bootstrap( $hooker );
-		// Shortcodes::bootstrap( $hooker );
-		// PostTypes::bootstrap( $hooker );
-		// Taxonomies::bootstrap( $hooker );
-		// Plugins::bootstrap( $hooker );
-
-		if ( is_admin() ) {
-			Admin::bootstrap( $hooker );
-		} else {
-			Frontend::bootstrap( $hooker );
-		}
+	/**
+	 * Hook the class.
+	 *
+	 * @param HookerInterface $hooker Hooker
+	 */
+	public function __construct( HookerInterface $hooker ) {
+		$hooker->hook( $this, $this::HOOK_PREFIX );
 	}
 
-	public static function action_after_switch_theme( $name, $theme ) {
+	/**
+	 * Force some sensible defaults.
+	 */
+	public function action_after_switch_theme( $name, $theme ) {
 		update_option( 'permalink_structure', '/%postname%/' );
 		update_option( 'uploads_use_yearmonth_folders', 0 );
 		flush_rewrite_rules( true );
@@ -47,9 +41,8 @@ class Core {
 	 *
 	 * @since _s 1.0
 	 */
-	public static function action_after_setup_theme() {
+	public function action_after_setup_theme() {
 		load_theme_textdomain( '_s', get_template_directory() . '/languages' );
-
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'title-tag' );
@@ -77,7 +70,7 @@ class Core {
 	 *
 	 * @since _s 1.0
 	 */
-	public static function action_widgets_init() {
+	public function action_widgets_init() {
 		register_sidebar(
 			array(
 				'name'          => __( 'Sidebar', '_s' ),

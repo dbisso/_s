@@ -21,10 +21,8 @@ use DBisso\Util\HookerInterface;
  * @package _s
  */
 class CustomHeader {
-	public static $hooker;
-
-	public static function bootstrap( HookerInterface $hooker ) {
-		self::$hooker = $hooker->hook( __CLASS__, $hooker->hook_prefix );
+	public function __construct( HookerInterface $hooker ) {
+		$hooker->hook( __CLASS__, $hooker->hook_prefix );
 	}
 
 	/**
@@ -36,7 +34,7 @@ class CustomHeader {
 	 *
 	 * @package _s
 	 */
-	public static function action_after_setup_theme() {
+	public function action_after_setup_theme() {
 		add_theme_support(
 			'custom-header',
 			apply_filters(
