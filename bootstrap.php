@@ -7,16 +7,34 @@ use DBisso\Util\Hooker;
  * Instantiate the basic classes for the theme.
  */
 class Bootstrap {
+	/**
+	 * Singleton instance.
+	 *
+	 * @var Bootstrap
+	 */
+	static $instance;
+
+	/**
+	 * Simple storage for the theme class instances.
+	 *
+	 * @var array
+	 */
 	public $container = array();
 
+	/**
+	 * Store the instance and kick things off
+	 */
 	public function __construct() {
+		if ( ! self::$instance instanceof Bootstrap ) {
+			self::$instance = $this;
+		}
+
 		/**
 		 * Bootstrap or die
 		 */
 		try {
 			if ( class_exists( '\DBisso\Util\Hooker' ) ) {
-				$container = $this->container;
-
+				$container =& $this->container;
 				$container['hooker'] = new Hooker;
 				$container['theme.core'] = new Core( $container['hooker'] );
 
@@ -41,5 +59,6 @@ class Bootstrap {
 	}
 }
 
+// Do the bootstrap.
 new Bootstrap;
 
